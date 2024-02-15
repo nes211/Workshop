@@ -7,7 +7,7 @@ import java.util.List;
 public interface CarService {
 
     Car getCar(String vin);
-    List<Car> getAllCars(String email);
+    List<Car> getAllUserCars(Long userId);
     void addCar(String vin);
     void deleteCar(String vin);
     void updateCar(String vin);

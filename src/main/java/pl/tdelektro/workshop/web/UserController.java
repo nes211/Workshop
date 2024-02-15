@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
 import pl.tdelektro.workshop.pojo.User;
 import pl.tdelektro.workshop.service.UserServiceImpl;
@@ -33,9 +34,12 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("{userId}/enroll/{vinNumber}")
-    public ResponseEntity<HttpStatus> enrollUserToCar(@PathVariable Long userId, @PathVariable String vinNumber) throws UserNotFoundException {
-        userService.enrollUserToCar(userId, vinNumber);
+
+    //Post mapping for register user with car only by ADMIN
+    @PostMapping("{userId}/register/{vinNumber}")
+    public ResponseEntity<HttpStatus> registerUserToCar(@PathVariable Long userId, @PathVariable String vinNumber)
+            throws UserNotFoundException, CarNotFoundException {
+        userService.registerUserToCar(userId, vinNumber);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

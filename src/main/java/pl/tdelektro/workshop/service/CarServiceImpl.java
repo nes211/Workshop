@@ -13,7 +13,7 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
-    public List<Car> getAllCars(String email) {
+    public List<Car> getAllUserCars(Long userId) {
         return null;
     }
 

@@ -38,9 +38,9 @@ public class WorkshopApplication implements CommandLineRunner {
 
 
 		List<Car> carList = Arrays.asList(
-				new Car(),
-				new Car(),
-				new Car()
+				new Car("SUPB01CEHTW858479", "Polonez"),
+				new Car("WAUZZZ8K6AA103083", "Audi"),
+				new Car("SBM11SAD4GW675962", "McLaren")
 		);
 
 		for(Car car : carList){

@@ -1,6 +1,7 @@
 package pl.tdelektro.workshop.service;
 
 import org.springframework.http.ResponseEntity;
+import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
 import pl.tdelektro.workshop.pojo.User;
 
@@ -15,5 +16,5 @@ public interface UserService {
     User findUserVin(int userId);
     void saveUser(User user);
 
-    void enrollUserToCar(Long userId, String vinNumber) throws UserNotFoundException;
+    void registerUserToCar(Long userId, String vinNumber) throws UserNotFoundException, CarNotFoundException;
 }
