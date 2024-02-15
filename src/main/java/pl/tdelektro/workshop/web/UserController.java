@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
-import pl.tdelektro.workshop.pojo.Car;
 import pl.tdelektro.workshop.pojo.User;
 import pl.tdelektro.workshop.service.UserServiceImpl;
 

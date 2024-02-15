@@ -3,6 +3,8 @@ package pl.tdelektro.workshop.pojo;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "car")
 @Getter
@@ -19,7 +21,15 @@ public class Car {
     @NonNull
     String vinNumber;
 
+    @Column(name = "model")
+    @NonNull
+    String model;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
+
+    @OneToMany(mappedBy = "car")
+    List<Task> taskList;
+
 }
