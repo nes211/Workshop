@@ -53,8 +53,8 @@ public class UserServiceImpl implements UserService {
     public void registerUserToCar(Long userId, Long carId) throws UserNotFoundException, CarNotFoundException {
         User user = unwrapUser(userId);
         Car car = unwrapCar(carId);
-        user.getCars().add(car);
-        userRepository.save(user);
+        car.setUser(user);
+        carRepository.save(car);
     }
 
     private User unwrapUser(Long userId) throws UserNotFoundException {

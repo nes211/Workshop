@@ -1,5 +1,6 @@
 package pl.tdelektro.workshop.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,7 +28,8 @@ public class Car {
     String model;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     User user;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
