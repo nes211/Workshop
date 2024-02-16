@@ -36,7 +36,7 @@ public class UserController {
 
 
     //Post mapping for register user with car only by ADMIN
-    @PostMapping("{userId}/register/{carId}")
+    @PostMapping("/{userId}/register/{carId}")
     public ResponseEntity<HttpStatus> registerUserToCar(@PathVariable Long userId, @PathVariable Long carId)
             throws UserNotFoundException, CarNotFoundException {
         userService.registerUserToCar(userId, carId);

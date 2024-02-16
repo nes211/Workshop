@@ -1,13 +1,9 @@
 package pl.tdelektro.workshop.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-
-import pl.tdelektro.workshop.validate.Password;
-import pl.tdelektro.workshop.validate.Vin;
 
 import java.util.List;
 
@@ -18,9 +14,6 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 public class User {
-
-    //private BCryptPasswordEncoder passwordEncoder;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +31,7 @@ public class User {
     String password;
 
     @Column(name = "cars")
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Car> cars;
 
 }

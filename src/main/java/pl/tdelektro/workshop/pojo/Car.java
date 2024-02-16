@@ -30,7 +30,7 @@ public class Car {
     @JoinColumn(name = "user_id")
     User user;
 
-    @OneToMany(mappedBy = "car")
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     List<Task> taskList;
 
 }
