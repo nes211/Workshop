@@ -14,15 +14,14 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private CarRepository carRepository;
 
     @Override
     public User getUser(Long userId) throws UserNotFoundException {
-        User user = unwrapUser(userId);
-        return user;
+        return unwrapUser(userId);
     }
 
     @Override
@@ -66,6 +65,7 @@ public class UserServiceImpl implements UserService{
             throw new UserNotFoundException(userId);
         }
     }
+
     private Car unwrapCar(Long carId) throws CarNotFoundException {
         Optional<Car> car = carRepository.findById(carId);
         if (car.isPresent()) {

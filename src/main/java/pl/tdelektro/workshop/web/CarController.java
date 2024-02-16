@@ -43,7 +43,7 @@ public class CarController {
 
     @PutMapping("/update/{carId}")
     public ResponseEntity<HttpStatus> updateCar(@PathVariable Long carId, @RequestBody Car car) throws CarNotFoundException {
-        carService.updateCar(carId, car);
+        carService.updateCar(car);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
