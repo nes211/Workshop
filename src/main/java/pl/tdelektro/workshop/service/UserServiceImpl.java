@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void registerUserToCar(Long userId, String vinNumber) throws UserNotFoundException, CarNotFoundException {
+    public void registerUserToCar(Long userId, Long carId) throws UserNotFoundException, CarNotFoundException {
         User user = unwrapUser(userId);
-        Car car = unwrapCar(vinNumber);
+        Car car = unwrapCar(carId);
 
 
     }
@@ -66,12 +66,12 @@ public class UserServiceImpl implements UserService{
             throw new UserNotFoundException(userId);
         }
     }
-    private Car unwrapCar(String vinNumber) throws CarNotFoundException {
-        Optional<Car> car = carRepository.findByVinNumber(vinNumber);
+    private Car unwrapCar(Long carId) throws CarNotFoundException {
+        Optional<Car> car = carRepository.findById(carId);
         if (car.isPresent()) {
             return car.get();
         } else {
-            throw new CarNotFoundException(vinNumber);
+            throw new CarNotFoundException(carId);
         }
     }
 }

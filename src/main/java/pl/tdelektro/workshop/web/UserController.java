@@ -36,10 +36,10 @@ public class UserController {
 
 
     //Post mapping for register user with car only by ADMIN
-    @PostMapping("{userId}/register/{vinNumber}")
-    public ResponseEntity<HttpStatus> registerUserToCar(@PathVariable Long userId, @PathVariable String vinNumber)
+    @PostMapping("{userId}/register/{carId}")
+    public ResponseEntity<HttpStatus> registerUserToCar(@PathVariable Long userId, @PathVariable Long carId)
             throws UserNotFoundException, CarNotFoundException {
-        userService.registerUserToCar(userId, vinNumber);
-        return new ResponseEntity<>(HttpStatus.OK);
+        userService.registerUserToCar(userId, carId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

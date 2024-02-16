@@ -1,7 +1,7 @@
 package pl.tdelektro.workshop.exception;
 
 public class CarNotFoundException extends Throwable {
-    public CarNotFoundException(String vinNumber){
-        super("Car with vin : " + vinNumber + " is not available  in our repository");
+    public CarNotFoundException(Long carId){
+        super("Car with id : " + carId + " is not available in repository");
     }
 }

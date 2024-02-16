@@ -3,14 +3,11 @@ package pl.tdelektro.workshop.web;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
 import pl.tdelektro.workshop.pojo.Car;
-import pl.tdelektro.workshop.pojo.User;
-import pl.tdelektro.workshop.repository.UserRepository;
+
 import pl.tdelektro.workshop.service.CarServiceImpl;
 
 import java.util.List;
@@ -21,30 +18,33 @@ import java.util.List;
 public class CarController {
 
     CarServiceImpl carService;
-    @GetMapping("/{vinNumber}")
-    public ResponseEntity<Car>getCarFromRequest(@PathVariable String vinNumber){
-        return new ResponseEntity<>(carService.getCar(vinNumber),HttpStatus.OK);
+
+    @GetMapping("/{carId}")
+    public ResponseEntity<Car> getCarFromRequest(@PathVariable Long carId) throws CarNotFoundException {
+        return new ResponseEntity<>(carService.getCar(carId), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/all")
-    public ResponseEntity<List<Car>>getAllUserCars(@PathVariable Long userId) throws UserNotFoundException {
-
-
+    public ResponseEntity<List<Car>> getAllUserCars(@PathVariable Long userId) throws UserNotFoundException {
         return new ResponseEntity<>(carService.getAllUserCars(userId), HttpStatus.OK);
     }
 
-    void addCar(String vin);
-    void deleteCar(String vin);
-    void updateCar(String vin);
+    @PostMapping("/add")
+    public ResponseEntity<HttpStatus> addCar(@RequestBody Car car) {
+        carService.addCar(car);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
+    @DeleteMapping("/delete/{carId}")
+    public ResponseEntity<HttpStatus> deleteCar(@PathVariable Long carId) {
+        carService.deleteCar(carId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
-
-
-
-
-
-
-
-
+    @PutMapping("/update/{carId}")
+    public ResponseEntity<HttpStatus> updateCar(@PathVariable Long carId, @RequestBody Car car) throws CarNotFoundException {
+        carService.updateCar(carId, car);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
