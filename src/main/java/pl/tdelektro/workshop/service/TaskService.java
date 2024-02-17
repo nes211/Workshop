@@ -10,13 +10,12 @@ public interface TaskService {
 
     void deleteTask(Long carId, Long taskId);
 
-    void updateTask(String toDoTask);
+    Task updateTask(Long taskId, String toDoTask);
     List<Task> getAllTasks();
     List<Task> getTasksRegistredToCar(Long carId);
     Task getTaskById (Long taskId);
 
     List<Task> getUserTasks(Long userId);
 
-    List<Task> getCarTasks(Long carId);
 
 }

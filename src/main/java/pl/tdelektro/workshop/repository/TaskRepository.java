@@ -10,4 +10,6 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     Optional<Task>findByToDoTaskName(String toDoTaskName);
 
     List<Task> findByCar_Id(Long id);
+
+    List<Task> findByUser_Id(Long id);
 }

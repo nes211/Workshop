@@ -18,7 +18,6 @@ public class TaskServiceImpl implements TaskService{
     public Task addTask(String toDoTaskName) {
         Task task = new Task(toDoTaskName);
         return taskRepository.save(task);
-
     }
 
     @Override
@@ -28,10 +27,10 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public void updateTask(String toDoTask) {
-
-
-
+    public Task updateTask(Long taskId, String toDoTask) {
+        Task task = unwrapTask(taskId);
+        task.setToDoTaskName(toDoTask);
+        return taskRepository.save(task);
     }
 
     @Override
@@ -41,22 +40,20 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<Task> getTasksRegistredToCar(Long carId) {
-        return taskRepository.findByCar_Id(carId);
+        List<Task> taskList = taskRepository.findByCar_Id(carId);
+
+        return taskList;
     }
 
     @Override
     public Task getTaskById(Long taskId) {
-        return null;
+        Task task = unwrapTask(taskId);
+        return task ;
     }
 
     @Override
     public List<Task> getUserTasks(Long userId) {
-        return null;
-    }
-
-    @Override
-    public List<Task> getCarTasks(Long carId) {
-        return null;
+        return taskRepository.findByUser_Id(userId);
     }
 
     private Task unwrapTask(Long taskId){

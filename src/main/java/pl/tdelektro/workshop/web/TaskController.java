@@ -16,7 +16,6 @@ public class TaskController {
 
     TaskServiceImpl taskService;
 
-
     //List of all tasks
     @GetMapping("/all")
     public ResponseEntity<List<Task>> getAllTasks() {
@@ -35,19 +34,24 @@ public class TaskController {
         return new ResponseEntity<>(taskService.getTasksRegistredToCar(carId), HttpStatus.OK);
     }
 
+    //Delete task by carId and taskId
     @DeleteMapping("/car/{carId}/{taskId}")
     public ResponseEntity<HttpStatus> deleteCarTask(@PathVariable Long carId, @PathVariable Long taskId) {
         taskService.deleteTask(carId, taskId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/new")
+    //Add new task
+    @PostMapping("/new")
     public ResponseEntity<Task>addNewTask(@RequestBody String taskToDo){
-
-        ;
-
-
         return new ResponseEntity<>(taskService.addTask(taskToDo), HttpStatus.CREATED);
     }
+
+    //Update task name by taskId and taskToDoName
+    @PutMapping("/update/{taskId}")
+    public ResponseEntity<Task>updateTask(@PathVariable Long taskId, @RequestBody String taskToDoName) {
+        return new ResponseEntity<>(taskService.updateTask(taskId, taskToDoName), HttpStatus.OK);
+    }
+
 
 }
