@@ -30,17 +30,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(int userId) {
+    public void deleteUser(Long userId) throws UserNotFoundException {
+        userRepository.delete(unwrapUser(userId));
+
 
     }
 
     @Override
-    public User updateUser(int userId) {
+    public User updateUser(Long userId, User user) throws UserNotFoundException {
+        User userToUpdate = unwrapUser(userId);
+        userRepository.save(user);
         return null;
     }
 
     @Override
-    public User findUserVin(int userId) {
+    public User findUserVin(Long userId) {
         return null;
     }
 

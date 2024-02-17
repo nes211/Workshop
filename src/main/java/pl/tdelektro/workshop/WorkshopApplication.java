@@ -24,6 +24,9 @@ public class WorkshopApplication implements CommandLineRunner {
     }
 
 
+
+
+    //Users for test
     @Override
     public void run(String... args) throws Exception {
         List<User> userList = Arrays.asList(
@@ -36,14 +39,15 @@ public class WorkshopApplication implements CommandLineRunner {
             userRepository.save(user);
         }
 
-
+        //Cars for test
         List<Car> carList = Arrays.asList(
-                new Car("SUPB01CEHTW858479", "Polonez"),
-                new Car("WAUZZZ8K6AA103083", "Audi"),
-                new Car("SBM11SAD4GW675962", "McLaren"),
-                new Car("WDB2030421A598116", "Mercedes-Benz"),
-                new Car("VF1FDCCL525890440", "Renault"),
-                new Car("KMHSU81XCDU147558", "Hyundai")
+
+                new Car("1M8GDM9AXKP042788", "checksumTest"),
+                new Car("1HGCM563X3A157921", "Honda"),
+                new Car("1G1BL52P0TR136787", "Chevrolet"),
+                new Car("5TDZT34A34S190929", "Toyota"),
+                new Car("1FAFP34NX6W229751", "Ford")
+
         );
 
         for (Car car : carList) {

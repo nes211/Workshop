@@ -42,4 +42,15 @@ public class UserController {
         userService.registerUserToCar(userId, carId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @DeleteMapping("delete/{userId}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
+        userService.deleteUser(userId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PutMapping("update/{userId}")
+    public ResponseEntity<User>updateUser(@PathVariable Long userId, @RequestBody User user) throws UserNotFoundException {
+        return new ResponseEntity<>(userService.updateUser(userId, user), HttpStatus.OK);
+    }
+
 }

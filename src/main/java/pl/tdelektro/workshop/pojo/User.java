@@ -1,5 +1,6 @@
 package pl.tdelektro.workshop.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -27,6 +28,7 @@ public class User {
 
     @Column(name="password")
     @NotEmpty(message = "Password can not be blank")
+    @JsonIgnore
     @NonNull
     String password;
 

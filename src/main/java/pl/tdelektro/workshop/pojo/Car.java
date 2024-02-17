@@ -3,6 +3,7 @@ package pl.tdelektro.workshop.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import pl.tdelektro.workshop.validate.Vin;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Car {
 
     @Column(name = "vin")
     @NonNull
+    @Vin
     String vinNumber;
 
     @Column(name = "model")
@@ -29,7 +31,7 @@ public class Car {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)

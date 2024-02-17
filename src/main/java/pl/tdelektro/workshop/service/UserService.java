@@ -12,11 +12,11 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    void deleteUser(int userId);
+    void deleteUser(Long userId) throws UserNotFoundException;
 
-    User updateUser(int userId);
+    User updateUser(Long userId, User user) throws UserNotFoundException;
 
-    User findUserVin(int userId);
+    User findUserVin(Long userId);
 
     void saveUser(User user);
 

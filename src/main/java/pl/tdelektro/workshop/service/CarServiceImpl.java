@@ -40,6 +40,11 @@ public class CarServiceImpl implements CarService{
         carRepository.save(car);
     }
 
+    @Override
+    public List<Car> getAllCars() {
+        return (List<Car>) carRepository.findAll();
+    }
+
     private Car unwrapCar(Long carId) throws CarNotFoundException {
         Optional<Car> car = carRepository.findById(carId);
         if(car.isPresent()){

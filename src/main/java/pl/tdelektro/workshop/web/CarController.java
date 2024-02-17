@@ -1,6 +1,7 @@
 package pl.tdelektro.workshop.web;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +46,12 @@ public class CarController {
     public ResponseEntity<HttpStatus> updateCar(@PathVariable Long carId, @RequestBody Car car) throws CarNotFoundException {
         carService.updateCar(car);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Car>> getAllCars() {
+
+        return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 
 }
