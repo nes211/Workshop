@@ -17,5 +17,5 @@ public interface TaskService {
 
     List<Task> getUserTasks(Long userId);
 
-
+    void assignTaskToCar(Long taskId, Long carId);
 }

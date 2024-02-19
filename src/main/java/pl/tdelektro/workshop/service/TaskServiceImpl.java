@@ -2,10 +2,16 @@ package pl.tdelektro.workshop.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.TaskNotFoundException;
+import pl.tdelektro.workshop.pojo.Car;
 import pl.tdelektro.workshop.pojo.Task;
+import pl.tdelektro.workshop.pojo.User;
+import pl.tdelektro.workshop.repository.CarRepository;
 import pl.tdelektro.workshop.repository.TaskRepository;
+import pl.tdelektro.workshop.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +20,8 @@ import java.util.Optional;
 public class TaskServiceImpl implements TaskService{
 
     TaskRepository taskRepository;
+    UserRepository userRepository;
+    private final CarRepository carRepository;
 
     @Override
     public Task addTask(Task task) {
@@ -40,7 +48,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<Task> getTasksAssignedToTheCar(Long carId) {
-        List<Task> taskList = taskRepository.findByCar_Id(carId);
+        List<Task> taskList = taskRepository.findByCars_Id(carId);
 
         return taskList;
     }
@@ -53,7 +61,23 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<Task> getUserTasks(Long userId) {
-        return taskRepository.findByUser_Id(userId);
+        Optional<User> user =  userRepository.findById(userId);
+        List<Task> taskList = new ArrayList<>();
+        if(user.isPresent()){
+            user.get().getCars().forEach(car-> car.getTasks().forEach(task -> taskList.add(task)));
+        }
+
+        return taskList;
+    }
+
+    @Override
+    public void assignTaskToCar(Long taskId, Long carId) {
+      Task task = unwrapTask(taskId);
+      Car car = unwrapCar(carId);
+
+      car.getTasks().add(task);
+
+        return ;
     }
 
     private Task unwrapTask(Long taskId){
@@ -62,6 +86,14 @@ public class TaskServiceImpl implements TaskService{
             return task.get();
         }else{
             throw new TaskNotFoundException(taskId);
+        }
+    }
+    private Car unwrapCar(Long carId){
+        Optional<Car> car = carRepository.findById(carId);
+        if(car.isPresent()){
+            return car.get();
+        }else{
+            throw new CarNotFoundException(carId);
         }
     }
 

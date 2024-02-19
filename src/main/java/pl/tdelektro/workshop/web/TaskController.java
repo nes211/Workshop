@@ -22,16 +22,16 @@ public class TaskController {
         return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
     }
 
-    //List of tasks assigned to user cars by userID
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<Task>> getUserTasks(@PathVariable Long userId) {
-        return new ResponseEntity<>(taskService.getUserTasks(userId), HttpStatus.OK);
-    }
-
     //List of tasks assigned to car by carId
     @GetMapping("/car/{carId}")
     public ResponseEntity<List<Task>> getCarTasks(@PathVariable Long carId) {
         return new ResponseEntity<>(taskService.getTasksAssignedToTheCar(carId), HttpStatus.OK);
+    }
+
+    //List of tasks assigned to user by userId
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Task>> getUserTasks(@PathVariable Long userId) {
+        return new ResponseEntity<>(taskService.getUserTasks(userId), HttpStatus.OK);
     }
 
     //Delete task by carId and taskId
@@ -53,5 +53,9 @@ public class TaskController {
         return new ResponseEntity<>(taskService.updateTask(taskId, task), HttpStatus.OK);
     }
 
+    @PostMapping("/{taskId}/assign/{carId}")
+    public ResponseEntity<HttpStatus>assignTaskWithCar(@PathVariable Long taskId, @PathVariable Long carId){
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
 }

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class CarServiceImpl implements CarService{
+public class CarServiceImpl implements CarService {
 
     CarRepository carRepository;
     TaskRepository taskRepository;
@@ -33,9 +33,7 @@ public class CarServiceImpl implements CarService{
     @Override
     public void addCar(Car car) {
         Task initialTask = unwrapTask(1L);
-
-
-        car.setTaskList(Arrays.asList(initialTask));
+        car.setTasks(Arrays.asList(initialTask));
         carRepository.save(car);
     }
 
@@ -56,18 +54,18 @@ public class CarServiceImpl implements CarService{
 
     private Car unwrapCar(Long carId) throws CarNotFoundException {
         Optional<Car> car = carRepository.findById(carId);
-        if(car.isPresent()){
+        if (car.isPresent()) {
             return car.get();
-        }else{
+        } else {
             return null;
         }
     }
 
-    private Task unwrapTask(Long taskId){
+    private Task unwrapTask(Long taskId) {
         Optional<Task> task = taskRepository.findById(taskId);
-        if(task.isPresent()){
+        if (task.isPresent()) {
             return task.get();
-        }else{
+        } else {
             throw new TaskNotFoundException(taskId);
         }
 
