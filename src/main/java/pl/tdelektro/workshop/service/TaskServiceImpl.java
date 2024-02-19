@@ -14,9 +14,9 @@ import java.util.Optional;
 public class TaskServiceImpl implements TaskService{
 
     TaskRepository taskRepository;
+
     @Override
-    public Task addTask(String toDoTaskName) {
-        Task task = new Task(toDoTaskName);
+    public Task addTask(Task task) {
         return taskRepository.save(task);
     }
 
@@ -27,9 +27,9 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public Task updateTask(Long taskId, String toDoTask) {
-        Task task = unwrapTask(taskId);
-        task.setToDoTaskName(toDoTask);
+    public Task updateTask(Long taskId, Task task) {
+        Task taskToUpdate = unwrapTask(taskId);
+        taskToUpdate.setToDoTaskName(task.getToDoTaskName());
         return taskRepository.save(task);
     }
 

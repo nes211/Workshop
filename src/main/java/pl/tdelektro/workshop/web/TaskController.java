@@ -42,15 +42,15 @@ public class TaskController {
     }
 
     //Add new task
-    @PostMapping("/new")
-    public ResponseEntity<Task>addNewTask(@RequestBody String taskToDo){
-        return new ResponseEntity<>(taskService.addTask(taskToDo), HttpStatus.CREATED);
+    @PostMapping("/add")
+    public ResponseEntity<Task>addNewTask(@RequestBody Task task){
+        return new ResponseEntity<>(taskService.addTask(task), HttpStatus.CREATED);
     }
 
     //Update task name by taskId and taskToDoName
     @PutMapping("/update/{taskId}")
-    public ResponseEntity<Task>updateTask(@PathVariable Long taskId, @RequestBody String taskToDoName) {
-        return new ResponseEntity<>(taskService.updateTask(taskId, taskToDoName), HttpStatus.OK);
+    public ResponseEntity<Task>updateTask(@PathVariable Long taskId, @RequestBody Task task) {
+        return new ResponseEntity<>(taskService.updateTask(taskId, task), HttpStatus.OK);
     }
 
 
