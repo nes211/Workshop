@@ -50,7 +50,6 @@ public class CarController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Car>> getAllCars() {
-
         return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 

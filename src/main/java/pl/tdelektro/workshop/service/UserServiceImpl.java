@@ -32,8 +32,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long userId) throws UserNotFoundException {
         userRepository.delete(unwrapUser(userId));
-
-
     }
 
     @Override
@@ -54,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUserToCar(Long userId, Long carId) throws UserNotFoundException, CarNotFoundException {
+    public void assignUserToTheCar(Long userId, Long carId) throws UserNotFoundException, CarNotFoundException {
         User user = unwrapUser(userId);
         Car car = unwrapCar(carId);
         car.setUser(user);

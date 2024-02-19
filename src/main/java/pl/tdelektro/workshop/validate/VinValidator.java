@@ -26,7 +26,6 @@ public class VinValidator implements ConstraintValidator<Vin, String> {
             Map.entry("7", 7),Map.entry("8", 8),Map.entry("9", 9)
     ));
 
-
     private int expectedVinLength = 17;
 
     @Override

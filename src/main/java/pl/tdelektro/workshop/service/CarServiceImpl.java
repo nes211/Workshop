@@ -3,9 +3,13 @@ package pl.tdelektro.workshop.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.tdelektro.workshop.exception.CarNotFoundException;
+import pl.tdelektro.workshop.exception.TaskNotFoundException;
 import pl.tdelektro.workshop.pojo.Car;
+import pl.tdelektro.workshop.pojo.Task;
 import pl.tdelektro.workshop.repository.CarRepository;
+import pl.tdelektro.workshop.repository.TaskRepository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,7 @@ import java.util.Optional;
 public class CarServiceImpl implements CarService{
 
     CarRepository carRepository;
+    TaskRepository taskRepository;
 
     @Override
     public Car getCar(Long carId) throws CarNotFoundException {
@@ -27,6 +32,10 @@ public class CarServiceImpl implements CarService{
 
     @Override
     public void addCar(Car car) {
+        Task initialTask = unwrapTask(1L);
+
+
+        car.setTaskList(Arrays.asList(initialTask));
         carRepository.save(car);
     }
 
@@ -50,7 +59,18 @@ public class CarServiceImpl implements CarService{
         if(car.isPresent()){
             return car.get();
         }else{
-            throw new CarNotFoundException(carId);
+            return null;
         }
     }
+
+    private Task unwrapTask(Long taskId){
+        Optional<Task> task = taskRepository.findById(taskId);
+        if(task.isPresent()){
+            return task.get();
+        }else{
+            throw new TaskNotFoundException(taskId);
+        }
+
+    }
+
 }

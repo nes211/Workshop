@@ -12,7 +12,7 @@ public interface TaskService {
 
     Task updateTask(Long taskId, Task task);
     List<Task> getAllTasks();
-    List<Task> getTasksRegistredToCar(Long carId);
+    List<Task> getTasksAssignedToTheCar(Long carId);
     Task getTaskById (Long taskId);
 
     List<Task> getUserTasks(Long userId);
