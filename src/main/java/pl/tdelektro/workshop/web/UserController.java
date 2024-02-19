@@ -23,6 +23,7 @@ public class UserController {
       return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
     }
 
+    // only by ADMIN
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers(){
         return new ResponseEntity<>(userService.getAllUsers(),HttpStatus.OK);
@@ -35,19 +36,23 @@ public class UserController {
     }
 
 
-    //Post mapping for register user with car only by ADMIN
+    //Post mapping for assign user with car
+    // only by ADMIN
     @PostMapping("/{userId}/register/{carId}")
-    public ResponseEntity<HttpStatus> registerUserToCar(@PathVariable Long userId, @PathVariable Long carId)
+    public ResponseEntity<HttpStatus> assignUserToCar(@PathVariable Long userId, @PathVariable Long carId)
             throws UserNotFoundException, CarNotFoundException {
-        userService.registerUserToCar(userId, carId);
+        userService.assignUserToTheCar(userId, carId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    // only by ADMIN
     @DeleteMapping("delete/{userId}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    // only by ADMIN
     @PutMapping("update/{userId}")
     public ResponseEntity<User>updateUser(@PathVariable Long userId, @RequestBody User user) throws UserNotFoundException {
         return new ResponseEntity<>(userService.updateUser(userId, user), HttpStatus.OK);

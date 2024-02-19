@@ -31,7 +31,7 @@ public class TaskController {
     //List of tasks assigned to car by carId
     @GetMapping("/car/{carId}")
     public ResponseEntity<List<Task>> getCarTasks(@PathVariable Long carId) {
-        return new ResponseEntity<>(taskService.getTasksRegistredToCar(carId), HttpStatus.OK);
+        return new ResponseEntity<>(taskService.getTasksAssignedToTheCar(carId), HttpStatus.OK);
     }
 
     //Delete task by carId and taskId

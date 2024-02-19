@@ -20,5 +20,5 @@ public interface UserService {
 
     void saveUser(User user);
 
-    void registerUserToCar(Long userId, Long carId) throws UserNotFoundException, CarNotFoundException;
+    void assignUserToTheCar(Long userId, Long carId) throws UserNotFoundException, CarNotFoundException;
 }

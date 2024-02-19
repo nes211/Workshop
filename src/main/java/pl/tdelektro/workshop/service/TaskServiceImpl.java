@@ -39,7 +39,7 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public List<Task> getTasksRegistredToCar(Long carId) {
+    public List<Task> getTasksAssignedToTheCar(Long carId) {
         List<Task> taskList = taskRepository.findByCar_Id(carId);
 
         return taskList;

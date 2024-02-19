@@ -3,9 +3,13 @@ package pl.tdelektro.workshop.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.tdelektro.workshop.repository.TaskRepository;
 import pl.tdelektro.workshop.validate.Vin;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "car")
@@ -19,8 +23,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-
-    @Column(name = "vin")
+    @Column(name = "vin", unique = true)
     @NonNull
     @Vin
     String vinNumber;

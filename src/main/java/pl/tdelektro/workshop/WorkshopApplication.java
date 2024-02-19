@@ -5,8 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.tdelektro.workshop.pojo.Car;
+import pl.tdelektro.workshop.pojo.Task;
 import pl.tdelektro.workshop.pojo.User;
 import pl.tdelektro.workshop.repository.CarRepository;
+import pl.tdelektro.workshop.repository.TaskRepository;
 import pl.tdelektro.workshop.repository.UserRepository;
 
 import java.util.Arrays;
@@ -18,6 +20,7 @@ public class WorkshopApplication implements CommandLineRunner {
 
     private UserRepository userRepository;
     private CarRepository carRepository;
+    private TaskRepository taskRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(WorkshopApplication.class, args);
@@ -51,5 +54,17 @@ public class WorkshopApplication implements CommandLineRunner {
             carRepository.save(car);
         }
 
+        List<Task> taskList = Arrays.asList(
+                new Task("Car inspection"),
+                new Task("Oil and filter change"),
+                new Task("Tyre change"),
+                new Task("Check coolant"),
+                new Task("Fix coolant leak"),
+                new Task("Check breakes"),
+                new Task("Fix breakes")
+        );
+
+        for(Task task: taskList)
+            taskRepository.save(task);
     }
 }
