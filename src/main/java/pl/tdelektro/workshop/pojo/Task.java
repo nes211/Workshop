@@ -19,7 +19,7 @@ public class Task {
     Long id;
 
     @NonNull
-    @Column(name = "todo_task")
+    @Column(name = "todo_task", unique = true)
     String toDoTaskName;
 
     @ManyToOne

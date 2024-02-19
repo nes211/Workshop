@@ -23,16 +23,13 @@ public class WorkshopApplication implements CommandLineRunner {
         SpringApplication.run(WorkshopApplication.class, args);
     }
 
-
-
-
     //Users for test
     @Override
     public void run(String... args) throws Exception {
         List<User> userList = Arrays.asList(
-                new User("user1@test.pl", "password1"),
-                new User("user2@test.pl", "password2"),
-                new User("user3@test.pl", "password3")
+                new User("Tomek@test.pl", "password1"),
+                new User("Dawid@test.pl", "password2"),
+                new User("Michal@test.pl", "password3")
         );
 
         for (User user : userList) {
@@ -42,11 +39,11 @@ public class WorkshopApplication implements CommandLineRunner {
         //Cars for test
         List<Car> carList = Arrays.asList(
 
-                new Car("1M8GDM9AXKP042788", "checksumTest"),
-                new Car("1HGCM563X3A157921", "Honda"),
-                new Car("1G1BL52P0TR136787", "Chevrolet"),
-                new Car("5TDZT34A34S190929", "Toyota"),
-                new Car("1FAFP34NX6W229751", "Ford")
+                new Car("1M8GDM9AXKP042788", "Pagani Zonda"),
+                new Car("1HGCM563X3A157921", "Honda Accord"),
+                new Car("1G1BL52P0TR136787", "Chevrolet Camaro"),
+                new Car("5TDZT34A34S190929", "Toyota Corolla"),
+                new Car("1FAFP34NX6W229751", "Ford F150")
 
         );
 
