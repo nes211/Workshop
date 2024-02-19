@@ -39,6 +39,21 @@ public class WorkshopApplication implements CommandLineRunner {
             userRepository.save(user);
         }
 
+        //Tasks for test
+        List<Task> taskList = Arrays.asList(
+                new Task("Car inspection"),
+                new Task("Oil and filter change"),
+                new Task("Tyre change"),
+                new Task("Check coolant"),
+                new Task("Fix coolant leak"),
+                new Task("Check breakes"),
+                new Task("Fix breakes")
+        );
+
+        for(Task task: taskList) {
+            taskRepository.save(task);
+        }
+
         //Cars for test
         List<Car> carList = Arrays.asList(
 
@@ -53,18 +68,5 @@ public class WorkshopApplication implements CommandLineRunner {
         for (Car car : carList) {
             carRepository.save(car);
         }
-
-        List<Task> taskList = Arrays.asList(
-                new Task("Car inspection"),
-                new Task("Oil and filter change"),
-                new Task("Tyre change"),
-                new Task("Check coolant"),
-                new Task("Fix coolant leak"),
-                new Task("Check breakes"),
-                new Task("Fix breakes")
-        );
-
-        for(Task task: taskList)
-            taskRepository.save(task);
     }
 }
