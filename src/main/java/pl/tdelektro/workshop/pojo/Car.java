@@ -3,13 +3,10 @@ package pl.tdelektro.workshop.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import pl.tdelektro.workshop.repository.TaskRepository;
 import pl.tdelektro.workshop.validate.Vin;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
 
 @Entity
 @Table(name = "car")
@@ -37,7 +34,10 @@ public class Car {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-    List<Task> taskList;
+    @ManyToMany
+    @JoinTable(name = "cars_tasks",
+            joinColumns = @JoinColumn(name = "car_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"))
+    List<Task> tasks;
 
 }

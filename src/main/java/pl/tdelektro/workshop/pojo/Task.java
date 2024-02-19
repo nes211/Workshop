@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "task")
 @Getter
@@ -22,11 +24,14 @@ public class Task {
     @Column(name = "todo_task", unique = true)
     String toDoTaskName;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+//    User user;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id", referencedColumnName = "id")
-    Car car;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = " cars_tasks",
+            joinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "car_id", referencedColumnName = "id"))
+    private List<Car> cars;
 }
