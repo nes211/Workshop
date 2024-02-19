@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.TaskNotFoundException;
+import pl.tdelektro.workshop.exception.UserNotFoundException;
 import pl.tdelektro.workshop.pojo.Car;
 import pl.tdelektro.workshop.pojo.Task;
 import pl.tdelektro.workshop.pojo.User;
@@ -65,19 +66,28 @@ public class TaskServiceImpl implements TaskService{
         List<Task> taskList = new ArrayList<>();
         if(user.isPresent()){
             user.get().getCars().forEach(car-> car.getTasks().forEach(task -> taskList.add(task)));
+            return taskList;
+        }else{
+            throw new UserNotFoundException(userId);
         }
 
-        return taskList;
+    }
+
+    @Override
+    public List<Task> getAllToDoTasks() {
+
+
+
+
+        return null;
     }
 
     @Override
     public void assignTaskToCar(Long taskId, Long carId) {
       Task task = unwrapTask(taskId);
       Car car = unwrapCar(carId);
-
       car.getTasks().add(task);
-
-        return ;
+      carRepository.save(car) ;
     }
 
     private Task unwrapTask(Long taskId){
