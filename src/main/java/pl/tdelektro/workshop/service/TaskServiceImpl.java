@@ -1,5 +1,6 @@
 package pl.tdelektro.workshop.service;
 
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.tdelektro.workshop.exception.CarNotFoundException;
@@ -20,9 +21,10 @@ import java.util.Optional;
 @AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
-    TaskRepository taskRepository;
-    UserRepository userRepository;
-    private final CarRepository carRepository;
+    private TaskRepository taskRepository;
+    private UserRepository userRepository;
+    private CarRepository carRepository;
+    private MailService mailService;
 
     @Override
     public Task addTask(Task task) {
@@ -36,10 +38,22 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void deleteTaskAssignedToCar(Long carId, Long taskId) {
+    public void deleteTaskAssignedToCar(Long carId, Long taskId) throws MessagingException {
         Car car = unwrapCar(carId);
         Task task = unwrapTask(taskId);
         car.getTasks().remove(task);
+
+        if(car.getTasks().isEmpty()){
+            mailService.sendEmail(
+                    car.getUser().getEmail()
+                    ,"The car "+ car.getModel() + " has been repaired"
+                    ,"Hello, <br><br>" +
+                            "your car: "+ car.getModel() + " , vin : " + car.getVinNumber() + "has been repaired. " +
+                            "<br>Please call us at: <b>500100100</b> to schedule a pickup appointment." +
+                            "<br><br>Workshop Team"
+            );
+        }
+
         carRepository.save(car);
     }
 
