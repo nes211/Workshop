@@ -16,7 +16,7 @@ public class TaskController {
 
     TaskServiceImpl taskService;
 
-    //List of all tasks in repository
+    //List of all tasks from repository
     @GetMapping("/all")
     public ResponseEntity<List<Task>> getAllTasks() {
         return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
@@ -49,8 +49,8 @@ public class TaskController {
     }
 
     //Delete the task assigned to the car by carId and taskId
-    @DeleteMapping("/car/{carId}/{taskId}")
-    public ResponseEntity<HttpStatus> deleteTaskAsignedToCar(@PathVariable Long carId, @PathVariable Long taskId) {
+    @DeleteMapping("/{taskId}/car/{carId}")
+    public ResponseEntity<HttpStatus> deleteTaskAsignedToCar(@PathVariable Long taskId, @PathVariable Long carId) {
         taskService.deleteTaskAssignedToCar(carId, taskId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
