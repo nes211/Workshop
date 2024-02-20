@@ -1,5 +1,6 @@
 package pl.tdelektro.workshop.service;
 
+import jakarta.mail.MessagingException;
 import pl.tdelektro.workshop.pojo.Task;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface TaskService {
 
     void deleteTask(Long taskId);
 
-    void deleteTaskAssignedToCar(Long carId, Long taskId);
+    void deleteTaskAssignedToCar(Long carId, Long taskId) throws MessagingException;
 
     Task updateTask(Long taskId, Task task);
 

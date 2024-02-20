@@ -1,5 +1,6 @@
 package pl.tdelektro.workshop.web;
 
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +51,7 @@ public class TaskController {
 
     //Delete the task assigned to the car by carId and taskId
     @DeleteMapping("/{taskId}/car/{carId}")
-    public ResponseEntity<HttpStatus> deleteTaskAsignedToCar(@PathVariable Long taskId, @PathVariable Long carId) {
+    public ResponseEntity<HttpStatus> deleteTaskAsignedToCar(@PathVariable Long taskId, @PathVariable Long carId) throws MessagingException {
         taskService.deleteTaskAssignedToCar(carId, taskId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
