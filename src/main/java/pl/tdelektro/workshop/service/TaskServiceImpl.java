@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
 
     TaskRepository taskRepository;
     UserRepository userRepository;
@@ -37,10 +37,11 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public void deleteTaskAssignedToCar(Long carId, Long taskId) {
+        Car car = unwrapCar(carId);
         Task task = unwrapTask(taskId);
-        taskRepository.delete(task);
+        car.getTasks().remove(task);
+        carRepository.save(car);
     }
-
 
 
     @Override
@@ -64,53 +65,51 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public Task getTaskById(Long taskId) {
         Task task = unwrapTask(taskId);
-        return task ;
+        return task;
     }
 
     @Override
     public List<Task> getUserTasks(Long userId) {
-        Optional<User> user =  userRepository.findById(userId);
+        Optional<User> user = userRepository.findById(userId);
         List<Task> taskList = new ArrayList<>();
-        if(user.isPresent()){
-            user.get().getCars().forEach(car-> car.getTasks().forEach(task -> taskList.add(task)));
+        if (user.isPresent()) {
+            user.get().getCars().forEach(car -> car.getTasks().forEach(task -> taskList.add(task)));
             return taskList;
-        }else{
+        } else {
             throw new UserNotFoundException(userId);
         }
-
     }
 
     @Override
     public List<Task> getAllToDoTasks() {
         List<Task> listAllToDoTasks = new ArrayList<>();
         List<User> userList = userRepository.findByIdNotNull();
-        userList.forEach(user ->
-                taskRepository.findByCars_User_Id(user.getId()).forEach(task -> listAllToDoTasks.add(task))
-                );
+        userList.forEach(user -> taskRepository.findByCars_User_Id(user.getId()).forEach(task -> listAllToDoTasks.add(task)));
         return listAllToDoTasks;
     }
 
     @Override
     public void assignTaskToCar(Long taskId, Long carId) {
-      Task task = unwrapTask(taskId);
-      Car car = unwrapCar(carId);
-      car.getTasks().add(task);
-      carRepository.save(car) ;
+        Task task = unwrapTask(taskId);
+        Car car = unwrapCar(carId);
+        car.getTasks().add(task);
+        carRepository.save(car);
     }
 
-    private Task unwrapTask(Long taskId){
+    private Task unwrapTask(Long taskId) {
         Optional<Task> task = taskRepository.findById(taskId);
-        if(task.isPresent()){
+        if (task.isPresent()) {
             return task.get();
-        }else{
+        } else {
             throw new TaskNotFoundException(taskId);
         }
     }
-    private Car unwrapCar(Long carId){
+
+    private Car unwrapCar(Long carId) {
         Optional<Car> car = carRepository.findById(carId);
-        if(car.isPresent()){
+        if (car.isPresent()) {
             return car.get();
-        }else{
+        } else {
             throw new CarNotFoundException(carId);
         }
     }
