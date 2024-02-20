@@ -30,16 +30,24 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public void deleteTask(Long carId, Long taskId) {
+    public void deleteTask(Long taskId) {
         Task task = unwrapTask(taskId);
         taskRepository.delete(task);
     }
 
     @Override
+    public void deleteTaskAssignedToCar(Long carId, Long taskId) {
+        Task task = unwrapTask(taskId);
+        taskRepository.delete(task);
+    }
+
+
+
+    @Override
     public Task updateTask(Long taskId, Task task) {
         Task taskToUpdate = unwrapTask(taskId);
         taskToUpdate.setToDoTaskName(task.getToDoTaskName());
-        return taskRepository.save(task);
+        return taskRepository.save(taskToUpdate);
     }
 
     @Override
@@ -50,7 +58,6 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public List<Task> getTasksAssignedToTheCar(Long carId) {
         List<Task> taskList = taskRepository.findByCars_Id(carId);
-
         return taskList;
     }
 
@@ -75,11 +82,12 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<Task> getAllToDoTasks() {
-
-
-
-
-        return null;
+        List<Task> listAllToDoTasks = new ArrayList<>();
+        List<User> userList = userRepository.findByIdNotNull();
+        userList.forEach(user ->
+                taskRepository.findByCars_User_Id(user.getId()).forEach(task -> listAllToDoTasks.add(task))
+                );
+        return listAllToDoTasks;
     }
 
     @Override

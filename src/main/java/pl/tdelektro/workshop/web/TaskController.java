@@ -16,7 +16,7 @@ public class TaskController {
 
     TaskServiceImpl taskService;
 
-    //List of all tasks
+    //List of all tasks in repository
     @GetMapping("/all")
     public ResponseEntity<List<Task>> getAllTasks() {
         return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
@@ -34,14 +34,28 @@ public class TaskController {
         return new ResponseEntity<>(taskService.getUserTasks(userId), HttpStatus.OK);
     }
 
-    //Delete task by carId and taskId
-    @DeleteMapping("/car/{carId}/{taskId}")
-    public ResponseEntity<HttpStatus> deleteCarTask(@PathVariable Long carId, @PathVariable Long taskId) {
-        taskService.deleteTask(carId, taskId);
+    //List of all to-do tasks assigned to all users
+    @GetMapping("/all/todo")
+    public ResponseEntity<List<Task>> getAllToDoTasks() {
+        return new ResponseEntity<>(taskService.getAllToDoTasks(), HttpStatus.OK);
+    }
+
+
+    //Delete the task from task repository
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<HttpStatus> deleteTask(@PathVariable Long taskId) {
+        taskService.deleteTask(taskId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    //Add new task
+    //Delete the task assigned to the car by carId and taskId
+    @DeleteMapping("/car/{carId}/{taskId}")
+    public ResponseEntity<HttpStatus> deleteTaskAsignedToCar(@PathVariable Long carId, @PathVariable Long taskId) {
+        taskService.deleteTaskAssignedToCar(carId, taskId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //Add a new task
     @PostMapping("/add")
     public ResponseEntity<Task> addNewTask(@RequestBody Task task) {
         return new ResponseEntity<>(taskService.addTask(task), HttpStatus.CREATED);
@@ -53,6 +67,7 @@ public class TaskController {
         return new ResponseEntity<>(taskService.updateTask(taskId, task), HttpStatus.OK);
     }
 
+    //Assign task with car
     @PostMapping("/{taskId}/assign/{carId}")
     public ResponseEntity<HttpStatus> assignTaskWithCar(@PathVariable Long taskId, @PathVariable Long carId) {
         taskService.assignTaskToCar(taskId, carId);

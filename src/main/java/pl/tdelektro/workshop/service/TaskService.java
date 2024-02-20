@@ -8,7 +8,8 @@ public interface TaskService {
 
     Task addTask(Task task);
 
-    void deleteTask(Long carId, Long taskId);
+    void deleteTask(Long taskId);
+    public void deleteTaskAssignedToCar(Long carId, Long taskId);
 
     Task updateTask(Long taskId, Task task);
     List<Task> getAllTasks();
