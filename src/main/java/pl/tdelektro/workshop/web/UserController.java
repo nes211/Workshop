@@ -20,17 +20,18 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(@PathVariable Long userId) throws UserNotFoundException {
-      return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
     }
 
     // only by ADMIN
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
-        return new ResponseEntity<>(userService.getAllUsers(),HttpStatus.OK);
+    public ResponseEntity<List<User>> getAllUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<User> saveUser(@RequestBody User user){
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        User userToSave = user;
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -39,8 +40,7 @@ public class UserController {
     //Post mapping for assign user with car
     // only by ADMIN
     @PostMapping("/{userId}/register/{carId}")
-    public ResponseEntity<HttpStatus> assignUserToCar(@PathVariable Long userId, @PathVariable Long carId)
-            throws UserNotFoundException, CarNotFoundException {
+    public ResponseEntity<HttpStatus> assignUserToCar(@PathVariable Long userId, @PathVariable Long carId) throws UserNotFoundException, CarNotFoundException {
         userService.assignUserToTheCar(userId, carId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -54,7 +54,7 @@ public class UserController {
 
     // only by ADMIN
     @PutMapping("update/{userId}")
-    public ResponseEntity<User>updateUser(@PathVariable Long userId, @RequestBody User user) throws UserNotFoundException {
+    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) throws UserNotFoundException {
         return new ResponseEntity<>(userService.updateUser(userId, user), HttpStatus.OK);
     }
 

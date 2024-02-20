@@ -1,6 +1,7 @@
 package pl.tdelektro.workshop.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,6 +27,7 @@ public class User {
     @NonNull
     String email;
 
+
     @Column(name="password")
     @NotEmpty(message = "Password can not be blank")
     @JsonIgnore
@@ -36,4 +38,13 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Car> cars;
 
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+
+    @JsonProperty
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
