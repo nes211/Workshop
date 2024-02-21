@@ -1,5 +1,6 @@
 package pl.tdelektro.workshop;
 
+import jakarta.mail.MessagingException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,14 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         ErrorResponse error = new ErrorResponse(Arrays.asList("Element already exist in repository",ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+
+    @ExceptionHandler(MessagingException.class)
+    public ResponseEntity<Object> handleEmailServiceException(MessagingException ex){
+        ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getMessage()));
+        return new ResponseEntity<>(error,HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {

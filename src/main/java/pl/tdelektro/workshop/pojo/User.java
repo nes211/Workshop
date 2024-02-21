@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import pl.tdelektro.workshop.validate.Password;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class User {
     @Column(name = "id")
     Long id;
 
-    @Column(name = "userEmail")
+    @Column(name = "userEmail", unique = true)
     @Email(message =" Incorrect email address")
     @NonNull
     String email;
@@ -31,6 +32,7 @@ public class User {
     @Column(name="password")
     @NotEmpty(message = "Password can not be blank")
     @NonNull
+    @Password
     String password;
 
     @Column(name = "cars")
