@@ -30,7 +30,6 @@ public class User {
 
     @Column(name="password")
     @NotEmpty(message = "Password can not be blank")
-    @JsonIgnore
     @NonNull
     String password;
 
