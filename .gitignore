@@ -2,7 +2,7 @@ HELP.md
 target/
 src/main/resources/application.properties
 src/main/resources/project.txt
-application.properties
+email.properties
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
