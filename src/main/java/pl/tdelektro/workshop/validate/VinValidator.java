@@ -2,7 +2,6 @@ package pl.tdelektro.workshop.validate;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import pl.tdelektro.workshop.exception.VinValidationException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,13 +19,13 @@ public class VinValidator implements ConstraintValidator<Vin, String> {
             Map.entry("N", 5), Map.entry("P", 7), Map.entry("R", 9),
             Map.entry("S", 2), Map.entry("T", 3), Map.entry("U", 4),
             Map.entry("V", 5), Map.entry("W", 6), Map.entry("X", 7),
-            Map.entry("Y", 8), Map.entry("Z", 9),Map.entry("0", 0),
-            Map.entry("1", 1),Map.entry("2", 2),Map.entry("3", 3),
-            Map.entry("4", 4),Map.entry("5", 5),Map.entry("6", 6),
-            Map.entry("7", 7),Map.entry("8", 8),Map.entry("9", 9)
+            Map.entry("Y", 8), Map.entry("Z", 9), Map.entry("0", 0),
+            Map.entry("1", 1), Map.entry("2", 2), Map.entry("3", 3),
+            Map.entry("4", 4), Map.entry("5", 5), Map.entry("6", 6),
+            Map.entry("7", 7), Map.entry("8", 8), Map.entry("9", 9)
     ));
 
-    private int expectedVinLength = 17;
+    private final int expectedVinLength = 17;
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
@@ -59,15 +58,16 @@ public class VinValidator implements ConstraintValidator<Vin, String> {
         }
         return true;
     }
+
     private boolean calcChecksum(String vinToVerify) {
         int checkSumCalculated = 0;
-
+        int multiplyResult = 0;
         char result = ' ';
-        for (int i = 0; i < vinToVerify.length(); i++) {
 
+        for (int i = 0; i < vinToVerify.length(); i++) {
             if (i != 8) {
                 char c = vinToVerify.charAt(i);
-                int multiplyResult = 0;
+
                 if (String.valueOf(c).equals(String.valueOf(0))) {
                     multiplyResult = 0;
                 } else {
@@ -78,7 +78,7 @@ public class VinValidator implements ConstraintValidator<Vin, String> {
         }
         checkSumCalculated = checkSumCalculated % 11;
 
-        result = checkSumCalculated == 10 ? 'X' :  (char)checkSumCalculated;
+        result = checkSumCalculated == 10 ? 'X' : (char) checkSumCalculated;
         if (result == (vinToVerify.charAt(8))) {
             return true;
         } else {

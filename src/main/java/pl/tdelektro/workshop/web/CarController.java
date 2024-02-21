@@ -1,14 +1,12 @@
 package pl.tdelektro.workshop.web;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
 import pl.tdelektro.workshop.pojo.Car;
-
 import pl.tdelektro.workshop.service.CarServiceImpl;
 
 import java.util.List;

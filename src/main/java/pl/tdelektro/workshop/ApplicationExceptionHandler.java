@@ -39,7 +39,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex){
-        ErrorResponse error = new ErrorResponse(Arrays.asList("Element already exist in repository",ex.getMessage()));
+        ErrorResponse error = new ErrorResponse(Arrays.asList("Element already exist in repository"));
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
