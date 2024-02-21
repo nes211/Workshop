@@ -1,6 +1,5 @@
 HELP.md
 target/
-src/main/resources/application.properties
 src/main/resources/project.txt
 email.properties
 !.mvn/wrapper/maven-wrapper.jar
@@ -15,7 +14,7 @@ email.properties
 .settings
 .springBeans
 .sts4-cache
-*.properties
+
 
 ### IntelliJ IDEA ###
 .idea
@@ -35,5 +34,3 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/application.properties
-src/main/resources/application.properties
