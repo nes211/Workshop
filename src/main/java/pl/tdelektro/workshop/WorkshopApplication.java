@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.tdelektro.workshop.pojo.Car;
 import pl.tdelektro.workshop.pojo.Task;
 import pl.tdelektro.workshop.pojo.User;
@@ -18,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class WorkshopApplication implements CommandLineRunner {
 
+
     private UserRepository userRepository;
     private CarRepository carRepository;
     private TaskRepository taskRepository;
@@ -25,6 +28,14 @@ public class WorkshopApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(WorkshopApplication.class, args);
     }
+
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
 
     //Users for test
     @Override

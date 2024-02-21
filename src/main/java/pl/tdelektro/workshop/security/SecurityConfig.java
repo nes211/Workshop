@@ -1,5 +1,6 @@
 package pl.tdelektro.workshop.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,44 +16,45 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig {
 
-        private BCryptPasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
-        //Access configuration
-        @Bean
+    //Access configuration
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-            http
-                    .csrf(csrf-> csrf.disable())
-                    .authorizeRequests()
-                    .requestMatchers(HttpMethod.POST,"/user/add").permitAll()
-                    .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.GET).hasRole("USER")
-                    .requestMatchers(HttpMethod.GET).hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
-                    .anyRequest().authenticated()
-                    .and()
-                    .httpBasic();
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeRequests()
+                .requestMatchers(HttpMethod.POST, "/user/add").permitAll()
+                .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET).hasRole("USER")
+                .requestMatchers(HttpMethod.GET).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
 
-            return http.build();
-        }
+        return http.build();
+    }
 
-        @Bean
-    public UserDetailsService users(){
-            UserDetails admin = User.builder()
-                    .username("admin")
-                    .password(passwordEncoder.encode("password"))
-                    .roles("ADMIN")
-                    .build();
+    @Bean
+    public UserDetailsService users() {
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password(passwordEncoder.encode("password"))
+                .roles("ADMIN")
+                .build();
 
-            UserDetails user = User.builder()
-                    .username("user")
-                    .password(passwordEncoder.encode("password"))
-                    .roles("USER")
-                    .build();
+        UserDetails user = User.builder()
+                .username("user")
+                .password(passwordEncoder.encode("password"))
+                .roles("USER")
+                .build();
 
-            return new InMemoryUserDetailsManager(admin, user);
-        }
+        return new InMemoryUserDetailsManager(admin, user);
+    }
 }

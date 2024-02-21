@@ -18,8 +18,13 @@ import java.util.Set;
 @Table(name = "users")
 @Getter
 @Setter
-@RequiredArgsConstructor
 public class User {
+    public User(@NonNull String email, @NonNull String password) {
+        this.email = email;
+        this.password = password;
+        this.role = "USER";
+        this.username = email;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,74 +36,9 @@ public class User {
     @NonNull
     String email;
 
-    String username = email;
+    String username;
 
-    Set<String> roles = new Set<String>() {
-        @Override
-        public int size() {
-            return ;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean contains(Object o) {
-            return false;
-        }
-
-        @Override
-        public Iterator<String> iterator() {
-            return null;
-        }
-
-        @Override
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        @Override
-        public <T> T[] toArray(T[] a) {
-            return null;
-        }
-
-        @Override
-        public boolean add(String s) {
-            return false;
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean containsAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(Collection<? extends String> c) {
-            return false;
-        }
-
-        @Override
-        public boolean retainAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean removeAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public void clear() {
-
-        }
-    };
+    String role;
 
 
     @Column(name="password")
@@ -120,4 +60,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }
