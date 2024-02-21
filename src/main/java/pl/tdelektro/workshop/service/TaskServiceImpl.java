@@ -24,7 +24,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
     private UserRepository userRepository;
     private CarRepository carRepository;
-    private MailService mailService;
+    private MailServiceImpl mailService;
 
     @Override
     public Task addTask(Task task) {
@@ -44,14 +44,7 @@ public class TaskServiceImpl implements TaskService {
         car.getTasks().remove(task);
 
         if(car.getTasks().isEmpty()){
-            mailService.sendEmail(
-                    car.getUser().getEmail()
-                    ,"The car "+ car.getModel() + " has been repaired"
-                    ,"Hello, <br><br>" +
-                            "your car: "+ car.getModel() + " , vin : " + car.getVinNumber() + "has been repaired. " +
-                            "<br>Please call us at: <b>500100100</b> to schedule a pickup appointment." +
-                            "<br><br>Workshop Team"
-            );
+            mailService.sendEmail(carId);
         }
 
         carRepository.save(car);
