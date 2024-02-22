@@ -31,7 +31,7 @@ public class WorkshopApplication implements CommandLineRunner {
 
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

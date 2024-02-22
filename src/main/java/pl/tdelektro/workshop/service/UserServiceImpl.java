@@ -2,6 +2,7 @@ package pl.tdelektro.workshop.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private CarRepository carRepository;
     private UserDetailsService userDetailsService;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public User getUser(Long userId) throws UserNotFoundException {
@@ -50,8 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-
-        
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 

@@ -8,17 +8,16 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import pl.tdelektro.workshop.validate.Password;
 
-import java.util.Collection;
-import java.util.Iterator;
+
 import java.util.List;
-import java.util.Set;
+
 
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
-public class User {
+public class User{
     public User(@NonNull String email, @NonNull String password) {
         this.email = email;
         this.password = password;
@@ -36,8 +35,12 @@ public class User {
     @NonNull
     String email;
 
+
+
+    @Column(name = "username", unique = true)
     String username;
 
+    @Column(name = "roles")
     String roles;
 
 
