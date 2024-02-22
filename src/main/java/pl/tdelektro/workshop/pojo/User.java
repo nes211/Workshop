@@ -22,7 +22,7 @@ public class User {
     public User(@NonNull String email, @NonNull String password) {
         this.email = email;
         this.password = password;
-        this.role = "USER";
+        this.roles = "USER";
         this.username = email;
     }
 
@@ -38,7 +38,7 @@ public class User {
 
     String username;
 
-    String role;
+    String roles;
 
 
     @Column(name="password")
