@@ -10,15 +10,17 @@ import pl.tdelektro.workshop.exception.PasswordCheckException;
 public class PasswordValidator implements ConstraintValidator<Password, String> {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if (s.matches(".*[a-z].") ||
-                s.matches(".*\\d.") &&
-                !s.matches(".*[!@#$%^&*()_;',./<>?:].*"))  {
-            return true;
-        } else {
-            throw new PasswordCheckException();
-        }
 
+        if (s.contains("$2a$10") && s.length() == 60) {
+            return true;
+        } else if (s.matches(".*[a-z].") ||
+                        s.matches(".*\\d.") &&
+                        !s.matches(".*[!@#$%^&*()_;',./<>?:].*")) {
+            return true;
+        }
+        throw new PasswordCheckException();
     }
 }
