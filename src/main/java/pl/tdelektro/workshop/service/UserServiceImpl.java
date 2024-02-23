@@ -1,8 +1,10 @@
 package pl.tdelektro.workshop.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
@@ -10,6 +12,7 @@ import pl.tdelektro.workshop.pojo.Car;
 import pl.tdelektro.workshop.pojo.User;
 import pl.tdelektro.workshop.repository.CarRepository;
 import pl.tdelektro.workshop.repository.UserRepository;
+import pl.tdelektro.workshop.security.SecurityConfig;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +23,8 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private CarRepository carRepository;
-    private UserDetailsService userDetailsService;
-    private BCryptPasswordEncoder passwordEncoder;
+    private SecurityConfig securityConfig;
+
 
     @Override
     public User getUser(Long userId) throws UserNotFoundException {
@@ -52,7 +55,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        UserDetails userToEnroll = org.springframework.security.core.userdetails.User
+                .withUsername(user.getEmail())
+                        .password(user.getPassword())
+                                .roles("USER")
+                                        .build();
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(userToEnroll);
+
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 

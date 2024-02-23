@@ -14,7 +14,7 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
 
-        if (s.contains("$2a$10") && s.length() == 60) {
+        if (s.contains("$2a$10$") && s.length() == 60) {
             return true;
         } else if (s.matches(".*[a-z].") ||
                         s.matches(".*\\d.") &&

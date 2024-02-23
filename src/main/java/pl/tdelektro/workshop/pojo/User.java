@@ -6,9 +6,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 import pl.tdelektro.workshop.validate.Password;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -21,7 +23,7 @@ public class User{
     public User(@NonNull String email, @NonNull String password) {
         this.email = email;
         this.password = password;
-        this.roles = "USER";
+        this.roles = Arrays.asList("ROLE_USER");
         this.username = email;
     }
 
@@ -40,8 +42,8 @@ public class User{
     @Column(name = "username", unique = true)
     String username;
 
-    @Column(name = "roles")
-    String roles;
+    @Column(name = "authorities")
+    List<String> roles;
 
 
     @Column(name="password")
