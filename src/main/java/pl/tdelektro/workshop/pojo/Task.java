@@ -24,10 +24,6 @@ public class Task {
     @Column(name = "todo_task", unique = true)
     String toDoTaskName;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    User user;
-
     @JsonIgnore
     @ManyToMany
     @JoinTable(name = " cars_tasks",

@@ -29,7 +29,6 @@ public class Car {
     @NonNull
     String model;
 
-
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)

@@ -6,12 +6,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import pl.tdelektro.workshop.validate.Password;
 
-
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -20,12 +22,14 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
-public class User{
+public class User {
     public User(@NonNull String email, @NonNull String password) {
         this.email = email;
         this.password = password;
-        this.roles = new SimpleGrantedAuthority("USER");
+        this.authority ="USER";
         this.username = email;
+
+
     }
 
     @Id
@@ -34,19 +38,21 @@ public class User{
     Long id;
 
     @Column(name = "userEmail", unique = true)
-    @Email(message =" Incorrect email address")
+    @Email(message = " Incorrect email address")
     @NonNull
     String email;
-
 
 
     @Column(name = "username", unique = true)
     String username;
 
     @Column(name = "authorities")
-    SimpleGrantedAuthority roles;
+    String authority;
 
-    @Column(name="password")
+    @Column(name = "role")
+    UserDetails userDetails;
+
+    @Column(name = "password")
     @NotEmpty(message = "Password can not be blank")
     @NonNull
     @Password

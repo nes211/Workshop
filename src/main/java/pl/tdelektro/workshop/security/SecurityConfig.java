@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import pl.tdelektro.workshop.repository.UserRepository;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -20,6 +21,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @AllArgsConstructor
 public class SecurityConfig {
 
+    UserRepository userRepository;
 
     //Access configuration
     @Bean
@@ -49,16 +51,16 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-
-        User.UserBuilder users = User.builder();
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(users.username("admin").password("password").roles("USER", "ADMIN").build());
-        manager.createUser(users.username("user").password("password").roles("USER").build());
-
-        return manager;
-    }
+//    @Bean
+//    public InMemoryUserDetailsManager inMemoryUserDetailsManager(pl.tdelektro.workshop.pojo.User user) {
+//
+//        User.UserBuilder users = User.builder();
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        //manager.createUser(users.username("admin").password("password").roles("USER", "ADMIN").build());
+//        manager.createUser(users.username(user.getUsername()).password(user.getPassword()).roles("USER").build());
+//
+//        return manager;
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
