@@ -23,7 +23,10 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler({UserNotFoundException.class,
             CarNotFoundException.class,
-            VinValidationException.class
+            TaskNotFoundException.class,
+            VinValidationException.class,
+            CarAlreadyRegisteredException.class
+
     })
     public ResponseEntity<Object> handleResource(RuntimeException ex) {
         ErrorResponse errors = new ErrorResponse(Arrays.asList(ex.getMessage()));

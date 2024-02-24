@@ -32,7 +32,7 @@ public class Car {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
     User user;
 
     @ManyToMany

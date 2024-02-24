@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import pl.tdelektro.workshop.validate.Password;
 
 
@@ -23,7 +24,7 @@ public class User{
     public User(@NonNull String email, @NonNull String password) {
         this.email = email;
         this.password = password;
-        this.roles = Arrays.asList("ROLE_USER");
+        this.roles = new SimpleGrantedAuthority("USER");
         this.username = email;
     }
 
@@ -43,8 +44,7 @@ public class User{
     String username;
 
     @Column(name = "authorities")
-    List<String> roles;
-
+    SimpleGrantedAuthority roles;
 
     @Column(name="password")
     @NotEmpty(message = "Password can not be blank")

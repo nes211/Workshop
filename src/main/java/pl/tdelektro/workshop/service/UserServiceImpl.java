@@ -1,11 +1,13 @@
 package pl.tdelektro.workshop.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
+import pl.tdelektro.workshop.exception.CarAlreadyRegisteredException;
 import pl.tdelektro.workshop.exception.CarNotFoundException;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
 import pl.tdelektro.workshop.pojo.Car;
@@ -56,15 +58,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
 
-        UserDetails userToEnroll = org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail())
+
+        UserDetails userToEnroll = org.springframework.security.core.userdetails.User.builder()
+                .username(user.getUsername())
                         .password(user.getPassword())
                                 .roles("USER")
                                         .build();
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(userToEnroll);
-
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -72,8 +73,14 @@ public class UserServiceImpl implements UserService {
     public void assignUserToTheCar(Long userId, Long carId) throws UserNotFoundException, CarNotFoundException {
         User user = unwrapUser(userId);
         Car car = unwrapCar(carId);
-        car.setUser(user);
-        carRepository.save(car);
+        if(car.getUser() == null) {
+            car.setUser(user);
+            carRepository.save(car);
+        }else{
+            throw new CarAlreadyRegisteredException(car.getUser().getUsername());
+        }
+
+
     }
 
     private User unwrapUser(Long userId) throws UserNotFoundException {
