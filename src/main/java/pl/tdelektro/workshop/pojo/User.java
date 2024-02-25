@@ -23,13 +23,21 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
+
+    //User authority constructor
     public User(@NonNull String email, @NonNull String password) {
         this.email = email;
         this.password = password;
         this.authority ="USER";
         this.username = email;
+    }
 
-
+    //Admin authority constructor
+    public User(@NonNull String email, @NonNull String password, String authority) {
+        this.email = email;
+        this.password = password;
+        this.authority ="ADMIN";
+        this.username = email;
     }
 
     @Id
