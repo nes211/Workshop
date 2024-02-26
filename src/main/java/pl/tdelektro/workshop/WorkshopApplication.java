@@ -33,16 +33,14 @@ public class WorkshopApplication implements CommandLineRunner {
     }
 
 
-
-
     //Users for test
     @Override
     public void run(String... args) throws Exception {
         List<User> userList = Arrays.asList(
                 new User("workshop@tdelektro.pl", passwordEncoder.encode("password"), "ADMIN"),
-                new User("tomek@test.pl", passwordEncoder.encode("password1")),
-                new User("dawid@test.pl", passwordEncoder.encode("password2")),
-                new User("michal@test.pl",passwordEncoder.encode( "password3"))
+                new User("tom@test.com", passwordEncoder.encode("password1")),
+                new User("dawid@test.com", passwordEncoder.encode("password2")),
+                new User("adalbert@test.com", passwordEncoder.encode("password3"))
         );
 
         for (User user : userList) {
@@ -60,7 +58,7 @@ public class WorkshopApplication implements CommandLineRunner {
                 new Task("Fix breakes")
         );
 
-        for(Task task: taskList) {
+        for (Task task : taskList) {
             taskRepository.save(task);
         }
 

@@ -54,6 +54,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(error,HttpStatus.SERVICE_UNAVAILABLE);
     }
 
+
+    //Handle the application argument exceptions with custom constraints for VIN
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
