@@ -37,6 +37,7 @@ public class WorkshopApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<User> userList = Arrays.asList(
+                new User("workshop@tdelektro.pl", "password", "ADMIN"),
                 new User("Tomek@test.pl", "password1"),
                 new User("Dawid@test.pl", "password2"),
                 new User("Michal@test.pl", "password3")

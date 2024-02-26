@@ -57,16 +57,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-
-//        securityConfig.inMemoryUserDetailsManager(user);
-//
-//        UserDetails userToEnroll = org.springframework.security.core.userdetails.User.builder()
-//                .username(user.getEmail())
-//                        .password(user.getPassword())
-//                                .roles("USER")
-//                                        .build();
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(userToEnroll);
+        user.setUsername(user.getEmail());
+        user.setAuthority("USER");
+        user.setRoles("USER");
         userRepository.save(user);
     }
 

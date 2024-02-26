@@ -51,17 +51,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-//    @Bean
-//    public InMemoryUserDetailsManager inMemoryUserDetailsManager(pl.tdelektro.workshop.pojo.User user) {
-//
-//        User.UserBuilder users = User.builder();
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        //manager.createUser(users.username("admin").password("password").roles("USER", "ADMIN").build());
-//        manager.createUser(users.username(user.getUsername()).password(user.getPassword()).roles("USER").build());
-//
-//        return manager;
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         // Use NoOpPasswordEncoder to disable password decoding
