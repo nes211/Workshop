@@ -17,6 +17,7 @@ public class TaskController {
 
     TaskServiceImpl taskService;
 
+    //All mappings only for ADMIN user
     //List of all tasks from repository
     @GetMapping("/all")
     public ResponseEntity<List<Task>> getAllTasks() {

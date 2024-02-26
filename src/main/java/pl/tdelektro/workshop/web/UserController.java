@@ -18,6 +18,8 @@ public class UserController {
 
     private UserServiceImpl userService;
 
+    //All mappings for user ADMIN expect
+
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(@PathVariable Long userId) throws UserNotFoundException {
         return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
@@ -42,14 +44,13 @@ public class UserController {
 
 
     //Post mapping for assign user with car
-    // only by ADMIN
     @PostMapping("/{userId}/register/{carId}")
     public ResponseEntity<HttpStatus> assignUserToCar(@PathVariable Long userId, @PathVariable Long carId) throws UserNotFoundException, CarNotFoundException {
         userService.assignUserToTheCar(userId, carId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // only by ADMIN
+    //
     @DeleteMapping("delete/{userId}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
         userService.deleteUser(userId);

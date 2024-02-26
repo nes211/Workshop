@@ -21,6 +21,8 @@ import java.util.List;
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
+
+    //The exceptions related to application layer exceptions
     @ExceptionHandler({UserNotFoundException.class,
             CarNotFoundException.class,
             TaskNotFoundException.class,
@@ -34,6 +36,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 
+    //An exception related to data defined in custom constraint for password
     @ExceptionHandler(PasswordCheckException.class)
     public ResponseEntity<Object> handlePasswordException(ValidationException ex) {
         ErrorResponse errors = new ErrorResponse(Arrays.asList(ex.getCause().getMessage()));
@@ -41,6 +44,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     }
 
 
+
+    //An exception related to data defined in the database as unique
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex){
         ErrorResponse error = new ErrorResponse(Arrays.asList("Element already exist in repository"));

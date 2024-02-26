@@ -18,6 +18,10 @@ public class CarController {
 
     CarServiceImpl carService;
 
+
+    //All mappings only for ADMIN user
+
+    //List of all to-do tasks assigned to all users
     @GetMapping("/{carId}")
     public ResponseEntity<Car> getCarFromRequest(@PathVariable Long carId) throws CarNotFoundException {
         return new ResponseEntity<>(carService.getCar(carId), HttpStatus.OK);
