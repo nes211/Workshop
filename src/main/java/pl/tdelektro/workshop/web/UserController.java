@@ -23,6 +23,11 @@ public class UserController {
         return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
     }
 
+    @GetMapping("/email/{userEmail}")
+    public ResponseEntity<User> getUserData(@PathVariable String userEmail) throws UserNotFoundException {
+        return new ResponseEntity<>(userService.getUserByEmail(userEmail), HttpStatus.OK);
+    }
+
     // only by ADMIN
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {

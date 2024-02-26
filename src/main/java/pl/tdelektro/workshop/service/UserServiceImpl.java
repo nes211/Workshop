@@ -2,13 +2,17 @@ package pl.tdelektro.workshop.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 import pl.tdelektro.workshop.exception.CarAlreadyRegisteredException;
 import pl.tdelektro.workshop.exception.CarNotFoundException;
+import pl.tdelektro.workshop.exception.UserNotAssignedWithEmailException;
 import pl.tdelektro.workshop.exception.UserNotFoundException;
 import pl.tdelektro.workshop.pojo.Car;
 import pl.tdelektro.workshop.pojo.User;
@@ -25,12 +29,29 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private CarRepository carRepository;
-    private SecurityConfig securityConfig;
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
     public User getUser(Long userId) throws UserNotFoundException {
         return unwrapUser(userId);
+    }
+
+    @Override
+    public User getUserByEmail(String userEmail) throws UserNotFoundException {
+        User user = unwrapUserByEmail(userEmail);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        org.springframework.security.core.userdetails.UserDetails userDetails =
+                (org.springframework.security.core.userdetails.UserDetails) principal;
+        String userEmailFromLogin = userDetails.getUsername();
+
+        if(userEmail.equals(userEmailFromLogin)){
+            return user;
+        }else{
+            throw new UserNotAssignedWithEmailException(userEmailFromLogin, userEmail);
+        }
+
     }
 
     @Override
@@ -46,7 +67,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long userId, User user) throws UserNotFoundException {
         User userToUpdate = unwrapUser(userId);
-        userRepository.save(user);
+        userToUpdate = user;
+        userRepository.save(userToUpdate);
         return null;
     }
 
@@ -58,6 +80,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         user.setUsername(user.getEmail());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setAuthority("USER");
         user.setRoles("USER");
         userRepository.save(user);
@@ -76,6 +99,17 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+    private User unwrapUserByEmail(String userEmail) throws UserNotFoundException {
+        User user = userRepository.findByUsername(userEmail);
+        if (user!=null) {
+            return user;
+        } else {
+            throw new UserNotFoundException(0L);
+        }
+    }
+
+
 
     private User unwrapUser(Long userId) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(userId);

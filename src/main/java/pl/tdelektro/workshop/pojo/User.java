@@ -25,23 +25,24 @@ public class User {
         this.email = email;
         this.username = email;
         this.password = password;
-        this.authority ="USER";
-        this.roles="USER";
+        this.authority = "USER";
+        this.roles = "USER";
     }
 
     //Admin authority constructor
-    public User(@NonNull String email, @NonNull String password,String authority) {
+    public User(@NonNull String email, @NonNull String password, String authority) {
         this.email = email;
         this.password = password;
-        this.authority ="ADMIN";
+        this.authority = "ADMIN";
         this.username = email;
-        this.roles="ADMIN";
+        this.roles = "ADMIN";
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;
+
 
     @Column(name = "userEmail", unique = true)
     @Email(message = " Incorrect email address")
@@ -56,6 +57,7 @@ public class User {
     String authority;
 
     @Column(name = "role")
+    @JsonIgnore
     String roles;
 
     @Column(name = "password")
@@ -77,6 +79,17 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @JsonIgnore
+    public String getEmail() {
+        return email;
+    }
+
+    @JsonProperty
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
 
 }

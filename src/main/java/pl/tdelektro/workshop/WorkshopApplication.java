@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import pl.tdelektro.workshop.pojo.Car;
 import pl.tdelektro.workshop.pojo.Task;
@@ -25,6 +26,7 @@ public class WorkshopApplication implements CommandLineRunner {
     private UserRepository userRepository;
     private CarRepository carRepository;
     private TaskRepository taskRepository;
+    private PasswordEncoder passwordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(WorkshopApplication.class, args);
@@ -37,10 +39,10 @@ public class WorkshopApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<User> userList = Arrays.asList(
-                new User("workshop@tdelektro.pl", "password", "ADMIN"),
-                new User("tomek@test.pl", "password1"),
-                new User("dawid@test.pl", "password2"),
-                new User("michal@test.pl", "password3")
+                new User("workshop@tdelektro.pl", passwordEncoder.encode("password"), "ADMIN"),
+                new User("tomek@test.pl", passwordEncoder.encode("password1")),
+                new User("dawid@test.pl", passwordEncoder.encode("password2")),
+                new User("michal@test.pl",passwordEncoder.encode( "password3"))
         );
 
         for (User user : userList) {

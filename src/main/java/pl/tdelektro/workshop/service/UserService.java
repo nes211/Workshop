@@ -10,6 +10,8 @@ public interface UserService {
 
     User getUser(Long userId) throws UserNotFoundException;
 
+    User getUserByEmail(String userEmail) throws UserNotFoundException;
+
     List<User> getAllUsers();
 
     void deleteUser(Long userId) throws UserNotFoundException;

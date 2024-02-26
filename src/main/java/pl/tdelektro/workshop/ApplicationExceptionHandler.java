@@ -25,7 +25,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
             CarNotFoundException.class,
             TaskNotFoundException.class,
             VinValidationException.class,
-            CarAlreadyRegisteredException.class
+            CarAlreadyRegisteredException.class,
+            UserNotAssignedWithEmailException.class
 
     })
     public ResponseEntity<Object> handleResource(RuntimeException ex) {
