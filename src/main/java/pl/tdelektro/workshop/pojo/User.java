@@ -6,12 +6,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import pl.tdelektro.workshop.validate.Password;
 
 import java.util.List;
@@ -37,7 +33,7 @@ public class User {
     public User(@NonNull String email, @NonNull String password,String authority) {
         this.email = email;
         this.password = password;
-        this.authority =authority;
+        this.authority ="ADMIN";
         this.username = email;
         this.roles="ADMIN";
     }

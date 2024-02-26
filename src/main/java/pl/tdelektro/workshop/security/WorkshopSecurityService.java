@@ -28,22 +28,16 @@ public class WorkshopSecurityService implements UserDetailsService {
             throw new UsernameNotFoundException("User does not exists. Please register yourself in workshop");
         }else{
             List<GrantedAuthority> authorities = new ArrayList<>();
-            for (User user:userList) {
-                if(user.getUsername().equals(username)) {
-                    var userName = user.getUsername();
-                    var password = user.getPassword();
-                    authorities.add(new SimpleGrantedAuthority(user.getAuthority()));
-                    authorities.add(new SimpleGrantedAuthority(user.getRoles()));
-                    org.springframework.security.core.userdetails.User userSpring =
-                            new org.springframework.security.core.userdetails.User(userName, password, authorities);
-                    userSpring.getAuthorities();
+            for (int i = 0 ; i<userList.size(); i++) {
+                if(userList.get(i).getUsername().equals(username)) {
+                    var userName = userList.get(i).getUsername();
+                    var password = userList.get(i).getPassword();
+                    //authorities.add(new SimpleGrantedAuthority(userList.get(i).getAuthority()));
+                    authorities.add(new SimpleGrantedAuthority(userList.get(i).getRoles()));
 
-
-                    return userSpring;
-                }else{
-                    throw new UsernameNotFoundException("User does not exists. Please register yourself in workshop");
+                    return new org.springframework.security.core.userdetails.User(userName, password, authorities);
                 }
             }
-        }return null;
+        }throw new UsernameNotFoundException("User does not exists. Please register yourself in workshop");
     }
 }

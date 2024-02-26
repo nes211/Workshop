@@ -28,23 +28,24 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .headers(headers -> headers
+                        .frameOptions(frameOptionsConfig -> frameOptionsConfig.sameOrigin()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/user/add")
-                        .permitAll()
                         .requestMatchers("/h2/**")
                         .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/user/add")
+                        .permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/user/**", "/task/**", "/car/**")
-                        .hasRole("ADMIN")
+                        .hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/user/**")
-                        .hasAuthority("USER")
-                        .requestMatchers(HttpMethod.GET, "/user/**", "/task/**", "/car/**")
-                        .hasAnyRole("ADMIN")
+                        .hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/task/**", "/car/**")
+                        .hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/user/**", "/task/**", "/car/**")
-                        .hasRole("ADMIN")
+                        .hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/user/**", "/task/**", "/car/**")
-                        .hasRole("ADMIN")
-
+                        .hasAuthority("ADMIN")
                 )
                 .httpBasic(withDefaults());
 
