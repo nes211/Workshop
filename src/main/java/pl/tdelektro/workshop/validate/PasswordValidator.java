@@ -16,11 +16,8 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
         //Check for BCrypt password string
         if (s.contains("$2a$10$") && (s.length() == (60) || s.length() == (65))) {
             return true;
-        } else if (s.matches(".*[a-z].") ||
-                        s.matches(".*\\d.") &&
-                        !s.matches(".*[!@#$%^&*()_;',./<>?:].*")) {
-            return false;
+        }else{
+            throw new PasswordCheckException();
         }
-        throw new PasswordCheckException();
     }
 }

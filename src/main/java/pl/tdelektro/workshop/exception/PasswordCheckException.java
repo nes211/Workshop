@@ -4,6 +4,6 @@ import jakarta.validation.ValidationException;
 
 public class PasswordCheckException extends ValidationException{
     public PasswordCheckException(){
-        super("Password invalid. Allowed only a-z characters and numbers");
+        super("Password invalid. Password is not like BCrypt pattern");
     }
 }

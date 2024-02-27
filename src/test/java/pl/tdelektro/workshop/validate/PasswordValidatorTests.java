@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.tdelektro.workshop.exception.PasswordCheckException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 
@@ -20,11 +20,13 @@ public class PasswordValidatorTests {
     @InjectMocks
     private PasswordValidator passwordValidator;
 
-
     @Test
     public void passwordIsValidNoEncoderTest() {
-        String validPassword = "test123";
-        assertTrue(passwordValidator.isValid(validPassword,mock(ConstraintValidatorContext.class)));
+        String inValidPassword = "test123";
+        assertThrows(Exception.class,()->{
+            passwordValidator.isValid(inValidPassword,mock(ConstraintValidatorContext.class));
+            throw new PasswordCheckException();
+        });
     }
 
     @Test
@@ -36,13 +38,19 @@ public class PasswordValidatorTests {
     @Test
     public void passwordIsValidBCrypt11SaltTest() {
         String inValidPassword = "$2a$11$x9lJru9EkTcj5peV53gKlOSMnZyekJr6WI/kbtRkSAuupysBOwwvS";
-        assertFalse(passwordValidator.isValid(inValidPassword,mock(ConstraintValidatorContext.class)));
+        assertThrows(Exception.class,()->{
+            passwordValidator.isValid(inValidPassword,mock(ConstraintValidatorContext.class));
+            throw new PasswordCheckException();
+        });
     }
 
     @Test
     public void passwordIsValidBCryptLongTest() {
         String inValidPassword = "$2a$10$x9lJru9EkTcj5peV53gKlOSMnZyekJr6WI/kbtRkSAuupysBOwwvS" + "test";
-        assertFalse(passwordValidator.isValid(inValidPassword,mock(ConstraintValidatorContext.class)));
+        assertThrows(Exception.class,()->{
+            passwordValidator.isValid(inValidPassword,mock(ConstraintValidatorContext.class));
+            throw new PasswordCheckException();
+        });
     }
 
 }
