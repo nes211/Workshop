@@ -19,7 +19,7 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
         } else if (s.matches(".*[a-z].") ||
                         s.matches(".*\\d.") &&
                         !s.matches(".*[!@#$%^&*()_;',./<>?:].*")) {
-            return true;
+            return false;
         }
         throw new PasswordCheckException();
     }
