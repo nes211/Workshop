@@ -37,6 +37,8 @@ public class UserServiceImpl implements UserService {
         return unwrapUser(userId);
     }
 
+    //User retrieve userdata from database, but user can check only his own data
+    //UserDetails imported for check login email
     @Override
     public User getUserByEmail(String userEmail) throws UserNotFoundException {
         User user = unwrapUserByEmail(userEmail);

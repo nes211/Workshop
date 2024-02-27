@@ -20,6 +20,9 @@ public class WorkshopSecurityService implements UserDetailsService {
 
     private UserRepository userRepository;
 
+
+
+    //Add new user for basic authorization login purpose
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -32,7 +35,6 @@ public class WorkshopSecurityService implements UserDetailsService {
                 if(userList.get(i).getUsername().equals(username)) {
                     var userName = userList.get(i).getUsername();
                     var password = userList.get(i).getPassword();
-                    //authorities.add(new SimpleGrantedAuthority(userList.get(i).getAuthority()));
                     authorities.add(new SimpleGrantedAuthority(userList.get(i).getRoles()));
 
                     return new org.springframework.security.core.userdetails.User(userName, password, authorities);

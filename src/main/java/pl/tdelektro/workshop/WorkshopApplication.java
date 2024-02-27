@@ -14,6 +14,7 @@ import pl.tdelektro.workshop.pojo.User;
 import pl.tdelektro.workshop.repository.CarRepository;
 import pl.tdelektro.workshop.repository.TaskRepository;
 import pl.tdelektro.workshop.repository.UserRepository;
+import pl.tdelektro.workshop.security.Admin;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +28,7 @@ public class WorkshopApplication implements CommandLineRunner {
     private CarRepository carRepository;
     private TaskRepository taskRepository;
     private PasswordEncoder passwordEncoder;
+    private Admin adminPassword;
 
     public static void main(String[] args) {
         SpringApplication.run(WorkshopApplication.class, args);
@@ -37,7 +39,7 @@ public class WorkshopApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<User> userList = Arrays.asList(
-                new User("workshop@tdelektro.pl", passwordEncoder.encode("password"), "ADMIN"),
+                new User("workshop@tdelektro.pl", adminPassword.getPassword(), "ADMIN"),
                 new User("tom@test.com", passwordEncoder.encode("password1")),
                 new User("dawid@test.com", passwordEncoder.encode("password2")),
                 new User("adalbert@test.com", passwordEncoder.encode("password3"))

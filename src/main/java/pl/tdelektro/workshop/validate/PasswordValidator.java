@@ -8,13 +8,13 @@ import pl.tdelektro.workshop.exception.PasswordCheckException;
 
 
 public class PasswordValidator implements ConstraintValidator<Password, String> {
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
 
-        if (s.contains("$2a$10$") && s.length() == 60) {
+        //Check for BCrypt password string
+        if (s.contains("$2a$10$") && (s.length() == (60) || s.length() == (65))) {
             return true;
         } else if (s.matches(".*[a-z].") ||
                         s.matches(".*\\d.") &&

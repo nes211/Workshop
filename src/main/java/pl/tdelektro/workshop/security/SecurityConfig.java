@@ -53,6 +53,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //Encoder for safe storing password in database
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

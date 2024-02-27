@@ -18,24 +18,27 @@ public class UserController {
 
     private UserServiceImpl userService;
 
-    //All mappings for user ADMIN expect
+    //All mappings only for ADMIN, expect POST /add and GET /email/{userEmail}
 
+    //Retrieve user with userID from database
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(@PathVariable Long userId) throws UserNotFoundException {
         return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
     }
 
+    //User retrieve his data from database after registration and successful login
     @GetMapping("/email/{userEmail}")
     public ResponseEntity<User> getUserData(@PathVariable String userEmail) throws UserNotFoundException {
         return new ResponseEntity<>(userService.getUserByEmail(userEmail), HttpStatus.OK);
     }
 
-    // only by ADMIN
+    //Return all users from database
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
+    //User can add new user to database
     @PostMapping("/add")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         userService.saveUser(user);
@@ -43,21 +46,21 @@ public class UserController {
     }
 
 
-    //Post mapping for assign user with car
+    //Assign user with car
     @PostMapping("/{userId}/register/{carId}")
     public ResponseEntity<HttpStatus> assignUserToCar(@PathVariable Long userId, @PathVariable Long carId) throws UserNotFoundException, CarNotFoundException {
         userService.assignUserToTheCar(userId, carId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    //
+    //Delete user by userId
     @DeleteMapping("delete/{userId}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long userId) throws UserNotFoundException {
         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // only by ADMIN
+    //Update user with userId from input JSON parsed to User
     @PutMapping("update/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) throws UserNotFoundException {
         return new ResponseEntity<>(userService.updateUser(userId, user), HttpStatus.OK);
