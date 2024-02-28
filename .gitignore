@@ -2,6 +2,7 @@ HELP.md
 target/
 src/main/resources/project.txt
 email.properties
+admin.properties
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -17,6 +18,7 @@ email.properties
 
 
 ### IntelliJ IDEA ###
+.properties
 .idea
 *.iws
 *.iml
