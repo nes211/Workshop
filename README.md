@@ -1,8 +1,10 @@
 # Workshop Application Documentation
 
 ## 1. Introduction
-
+<div class="wrap-text">
 The Workshop Application is a REST-based system designed to streamline workshop operations in customer service. It provides users with the ability to check the repair status of vehicles and receive email notifications upon repair completion. This documentation aims to provide an overview of the application's features, usage, and technical details.
+</div>
+
 ## 2. Getting Started
 ### Installation
 
@@ -11,12 +13,14 @@ The Workshop Application is a REST-based system designed to streamline workshop 
     Ensure you have the Java version 17 installed.
 
 ### Configuration
-
+<div class="wrap-text">
     Ensure database configurations are correctly set up in application.properties. H2 is configured by default.
     Modify email configurations in email.properties for access your service.
+</div>
 
 ## 3. Features
 
+<div class="wrap-text">
     User Authentication and Authorization: Users can log in and add new user securely with new credentials. 
     Admin can assign user with car in workshop. Basic authorization is implemented to ensure proper access 
     control.
@@ -25,6 +29,7 @@ The Workshop Application is a REST-based system designed to streamline workshop 
     or faults detected during the inspection
     Repair Status Check: Users can query the repair status of vehicles by providing his credentials.
     Email Notifications: Email notifications are sent to users upon repair completion.
+</div>
 
 ## 4. Technologies Used
 
@@ -86,11 +91,10 @@ RP123456	John Doe	Toyota	Camry	In Progress
     Ensure proper configuration for the deployment environment.
 
 ## 11. Some problems during project
-
-    Vin crc verification. There is no only one crc algorithm for Vin number. 
-    Most comapany has them own crc algorithm. The most popular is Luna10 
+<div class="wrap-text">
+    Vin crc verification. There is no only one crc algorithm for Vin number. Most comapany has them own crc algorithm. The most popular is Luna10 
     (inculde weight multiply system and modulo divide by 11 method).
-
+</div>
 ## 12. Troubleshooting
 
   ### 1. Application Fails to Start
@@ -98,11 +102,11 @@ RP123456	John Doe	Toyota	Camry	In Progress
 Issue: The application fails to start, and an error message is displayed.
 
 Solution:
-
+<div class="wrap-text">
     Check if all required dependencies are installed and configured correctly.
     Verify that the database connection settings in application.properties are accurate.
     Review the application logs for detailed error messages to pinpoint the issue.
-
+</div>
   ### 2. Unable to Authenticate
 
 Issue: Users are unable to authenticate and receive errors when attempting to log in.
@@ -118,11 +122,11 @@ Solution:
 Issue: Email notifications are not being sent to users upon repair completion.
 
 Solution:
-
+<div class="wrap-text">
     Verify that the email service configuration in email.properties is correct, including the SMTP server settings.
     Check if the email address provided for notifications is valid and accessible.
     Review the application logs for any errors related to the email service.
-
+</div>
 ### 4. Database Connection Issues
 
 Issue: The application encounters errors related to database connectivity.
@@ -135,10 +139,10 @@ Solution:
 </div>
     
 ## 13. Future Improvements
-
+<div class="wrap-text">
     Roadmap for future development includes adding additional features such as user management page.
     Feature requests and suggestions are encouraged.
-
+</div>
 ## 14. License
 
     This project is licensed under the MIT License.
