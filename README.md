@@ -65,13 +65,18 @@ The Workshop Application is a REST-based system designed to streamline workshop 
 
 ## 8. Database Schema
 
-### Users Table
-username	password	role
-example_user	hashed_password	ROLE_USER
+### Table Structure
+<img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/structore.jpg">
 
-### Repairs Table
-repair_id	customer_name	vehicle_make	vehicle_model	status
-RP123456	John Doe	Toyota	Camry	In Progress
+### Users Table
+<img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/users.jpg">
+
+### Tasks Table
+<img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/tasks.jpg">
+
+
+### Cars Table 
+<img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/cars.jpg">
 
 ## 9. Testing
 
@@ -95,6 +100,7 @@ RP123456	John Doe	Toyota	Camry	In Progress
     Vin crc verification. There is no only one crc algorithm for Vin number. Most comapany has them own crc algorithm. The most popular is Luna10 
     (inculde weight multiply system and modulo divide by 11 method).
 </div>
+
 ## 12. Troubleshooting
 
   ### 1. Application Fails to Start
@@ -107,7 +113,8 @@ Solution:
     Verify that the database connection settings in application.properties are accurate.
     Review the application logs for detailed error messages to pinpoint the issue.
 </div>
-  ### 2. Unable to Authenticate
+ 
+ ### 2. Unable to Authenticate
 
 Issue: Users are unable to authenticate and receive errors when attempting to log in.
 
@@ -127,6 +134,7 @@ Solution:
     Check if the email address provided for notifications is valid and accessible.
     Review the application logs for any errors related to the email service.
 </div>
+
 ### 4. Database Connection Issues
 
 Issue: The application encounters errors related to database connectivity.
