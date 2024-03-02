@@ -151,6 +151,7 @@ Solution:
     Roadmap for future development includes adding additional features such as user management page.
     Feature requests and suggestions are encouraged.
 </div>
+
 ## 14. License
 
     This project is licensed under the MIT License.
