@@ -60,10 +60,11 @@ The Workshop Application is a REST-based system designed to streamline workshop 
         Use Postman to send POST requests to the /user/add endpoint.
         Authenticate using the Postman GET request to endpoint /user/email/{userEmail} with valid credentials.
   Postman requests file 
-    
-    [Postman requests file](https://github.com/nes211/Workshop/blob/5da2c5049fc1533ea93fe50aaf6231f1eb8308df/Workshop.postman_collection.json) 
-
 </div>
+
+
+    <img alt="Postman queries" src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/postman.jpg">
+
 
 ## 7. Authentication and Authorization
 
@@ -73,17 +74,17 @@ The Workshop Application is a REST-based system designed to streamline workshop 
 ## 8. Database Schema
 
 ### Table Structure
-<img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/structore.jpg">
+<img alt="Shows table structure" src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/structore.jpg">
 
 ### Users Table
-<img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/users.jpg">
+<img alt="Shows user table" src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/users.jpg">
 
 ### Tasks Table
-<img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/tasks.jpg">
+<img alt="Shows tasks table" src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/tasks.jpg">
 
 
 ### Cars Table 
-<img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/cars.jpg">
+<img alt="Showscars table" src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/cars.jpg">
 
 ## 9. Testing
 
