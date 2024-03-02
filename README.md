@@ -59,6 +59,7 @@ The Workshop Application is a REST-based system designed to streamline workshop 
     Interacting with the API:
         Use Postman to send POST requests to the /user/add endpoint.
         Authenticate using the Postman GET request to endpoint /user/email/{userEmail} with valid credentials.
+  Postman requests file [Postman file](https://pages.github.com/).  
 </div>
 
 ## 7. Authentication and Authorization
