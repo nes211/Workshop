@@ -1,0 +1,651 @@
+{
+	"info": {
+		"_postman_id": "6cb489c9-eba7-4124-920f-58959222d65f",
+		"name": "Workshop",
+		"description": "Welcome to Workshop\n\nWorkshop is a Java Spring Boot REST application back-end with basic security implementation.\n\nIn Postman, we have two types of users: user and admin. During registration, a user provides an email address and a password. Then, an administrator assigns the user to a car that is under repair.\n\nDuring the repair process, the user can check the repair status and remaining service tasks.\n\nAfter the repair, when the last service task is completed, the application sends an email notification to the car owner's email address to arrange pickup.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31141608"
+	},
+	"item": [
+		{
+			"name": "User  // access for user and admin roles",
+			"item": [
+				{
+					"name": "Add new User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"workshop1@tdelektro.pl\",\r\n    \"password\":\"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/user/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user data by email address",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "daniel@test.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/user/email/daniel@test.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"email",
+								"daniel@test.com"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "POST is used to create a new user in the database and does not require logging in or a password.\n\nGET is used to retrieve user data based on the email address associated with the user's account."
+		},
+		{
+			"name": "Admin // access only for admin roles users",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Assign user with car",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/4/register/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"4",
+										"register",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user with id",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/4",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all users",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/user/all",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cars",
+					"item": [
+						{
+							"name": "Get car with id",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/car/10",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"car",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all cars",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/car/all",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"car",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new car",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"vinNumber\": \"1HGCM82633A001234\",\r\n    \"model\":\"Polonez 1500\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/car/add",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"car",
+										"add"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tasks",
+					"item": [
+						{
+							"name": "Get all tasks from repo",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/task/all",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all todo tasks",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/task/all/todo",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"all",
+										"todo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user tasks",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/task/user/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all tasks assigned to car",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/task/car/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"car",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new task",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"toDoTaskName\":\"Chack battery\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/task/add",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Assign task with car",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/task/1/assign/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"1",
+										"assign",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update existing task",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"toDoTaskName\":\"Typical car inspection\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/task/update/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"update",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete task from repository",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/task/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "End task assigned to the car",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "swordfish",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "workshop@tdelektro.pl",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/task/1/car/6",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"1",
+										"car",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "_**Workshop**_ management encompasses all activities related to managing and  \noperating an automotive workshop:\n\n_**Users**_\n\n\\--> Assign registred user with car,\n\n\\--> Get user by id,\n\n\\--> Get list of all users.\n\n_**Cars**_\n\n\\--> Get list of all cars,\n\n\\--> Add a new car to repository.\n\n_**Tasks**_\n\n\\--> Get list of all tasks from repo,\n\n\\--> Get list of all to-do tasks,\n\n\\--> Get list of all user to-do tasks,\n\n\\--> Get all to-do tasks assigned to car,\n\n\\--> Add new task to repo,\n\n\\--> Assign new to-do task with car,\n\n\\--> Update existing task in repo,\n\n\\--> Delete task from repo,\n\n\\--> End to-do task assigned to car."
+		}
+	]
+}
