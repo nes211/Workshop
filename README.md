@@ -50,13 +50,16 @@ The Workshop Application is a REST-based system designed to streamline workshop 
     src/main/resources: Contains configuration files.
 
 ## 6. Usage
-
+<div class="wrap-text">
     Running the Application:
         Start the application locally using your IDE or by running mvn spring-boot:run in the terminal.
+</div>
 
+<div class="wrap-text">
     Interacting with the API:
         Use Postman to send POST requests to the /user/add endpoint.
         Authenticate using the Postman GET request to endpoint /user/email/{userEmail} with valid credentials.
+</div>
 
 ## 7. Authentication and Authorization
 
