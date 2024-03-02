@@ -58,13 +58,15 @@ The Workshop Application is a REST-based system designed to streamline workshop 
 <div class="wrap-text">
     Interacting with the API:
         Use Postman to send POST requests to the /user/add endpoint.
-        Authenticate using the Postman GET request to endpoint /user/email/{userEmail} with valid credentials.
-  Postman requests file 
+        Authenticate user using the Postman GET request to endpoint /user/email/{userEmail} with valid credentials.
+        Authenticate admin using the Postman all CRUD requests to all endpoints.
+        <br>Postman requests file included in repo.
 </div>
 
-
-    <img alt="Postman queries" src="https://github.com/nes211/Workshop/blob/249e7df7c38367da0c3878e1564520ffb0b7f1ad/img/postman.jpg">
-
+<br>
+<img alt="Postman queries" src="https://github.com/nes211/Workshop/blob/5637826ae8f2af306e69ecc3dc24b48aae1c8290/img/postman.jpg">
+<br>
+<br>
 
 ## 7. Authentication and Authorization
 
