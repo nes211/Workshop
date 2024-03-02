@@ -128,11 +128,11 @@ Solution:
 Issue: The application encounters errors related to database connectivity.
 
 Solution:
-
+<div class="wrap-text">
     Check if the database server is running and accessible. H2 server is running all the time with application.
     Verify that the database credentials and connection settings in application.properties are accurate.
     Test the connection manually using a database client or command-line tool.
-
+</div>
     
 ## 13. Future Improvements
 
