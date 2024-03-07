@@ -9,7 +9,7 @@ The Workshop Application is a REST-based system designed to streamline workshop 
 ### Installation
 
     Clone the project repository from Git.
-    Import the project into your preferred Java IDE (designed in InteliJ 2023.3).
+    Import the project into your preferred Java IDE (designed in IntelliJ 2023.3).
     Ensure you have the Java version 17 installed.
 
 ### Configuration
