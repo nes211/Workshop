@@ -18,7 +18,9 @@ public class UserController {
 
     private UserServiceImpl userService;
 
+    //
     //All mappings only for ADMIN, expect POST /add and GET /email/{userEmail}
+    //
 
     //Retrieve user with userID from database
     @GetMapping("/{userId}")

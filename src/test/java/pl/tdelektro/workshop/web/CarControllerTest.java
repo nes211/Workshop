@@ -85,7 +85,7 @@ public class CarControllerTest {
     @Test
     public void deleteCar() {
 
-        int carId = 1;
+        int carId = 2;
         RestAssured
                 .given()
                 .delete("/delete/{carId}", carId)
@@ -105,6 +105,4 @@ public class CarControllerTest {
                 .then()
                 .statusCode(201);
     }
-
-
 }
