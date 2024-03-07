@@ -3,7 +3,12 @@
 ## 1. Introduction
 <div class="wrap-text">
 The Workshop Application is a REST-based system designed to streamline workshop operations in customer service. It provides users with the ability to check the repair status of vehicles and receive email notifications upon repair completion. This documentation aims to provide an overview of the application's features, usage, and technical details.
+
+<img alt="Email configuration" src="https://github.com/nes211/Workshop/blob/b67b8e2e3a346e1f5e18e7900d6f40b298b23aa2/img/workshop_diagram.jpg">
+
 </div>
+
+
 
 ## 2. Getting Started
 ### Installation
