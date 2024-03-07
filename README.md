@@ -16,6 +16,10 @@ The Workshop Application is a REST-based system designed to streamline workshop 
 <div class="wrap-text">
     Ensure database configurations are correctly set up in application.properties. H2 is configured by default.
     Modify email configurations in email.properties for access your service.
+
+
+<img alt="Email configuration" src="https://github.com/nes211/Workshop/blob/d7a3ef891ca3bd68eac09655cc065a444c3946ad/img/email_config.jpg">
+    
 </div>
 
 ## 3. Features
