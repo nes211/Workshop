@@ -1,6 +1,9 @@
 package pl.tdelektro.workshop.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
+@JacksonXmlRootElement(localName = "task")
 public class Task {
 
     @Id
@@ -22,6 +26,8 @@ public class Task {
 
     @NonNull
     @Column(name = "todo_task", unique = true)
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "toDoTaskName")
     String toDoTaskName;
 
     @JsonIgnore

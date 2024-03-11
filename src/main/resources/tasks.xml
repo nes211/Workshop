@@ -1,0 +1,23 @@
+<tasks>
+    <task>
+        <toDoTaskName>Car inspection</toDoTaskName>
+    </task>
+    <task>
+        <toDoTaskName>Oil and filter change</toDoTaskName>
+    </task>
+    <task>
+        <toDoTaskName>Tyre change</toDoTaskName>
+    </task>
+    <task>
+        <toDoTaskName>Check coolant</toDoTaskName>
+    </task>
+    <task>
+        <toDoTaskName>Fix coolant leak</toDoTaskName>
+    </task>
+    <task>
+        <toDoTaskName>Check breaks</toDoTaskName>
+    </task>
+    <task>
+        <toDoTaskName>Fix breaks</toDoTaskName>
+    </task>
+</tasks>
