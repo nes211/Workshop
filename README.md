@@ -50,6 +50,7 @@ The Workshop Application is a REST-based system designed to streamline workshop 
     JUnit: For unit testing.
     RestAssured: For integration testing.
     Postman: For API testing and data input/output.
+    Json, XML, CSV initial data parsing.
     Git: For version control.
 
 ## 5. Application Structure
