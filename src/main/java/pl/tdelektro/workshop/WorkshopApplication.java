@@ -1,5 +1,7 @@
 package pl.tdelektro.workshop;
 
+import com.opencsv.CSVReader;
+import com.opencsv.ICSVParser;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +19,9 @@ import pl.tdelektro.workshop.repository.TaskRepository;
 import pl.tdelektro.workshop.repository.UserRepository;
 import pl.tdelektro.workshop.security.Admin;
 
+import java.io.FileReader;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,6 +45,11 @@ public class WorkshopApplication implements CommandLineRunner {
     //Users for test
     @Override
     public void run(String... args) throws Exception {
+
+
+
+
+
         List<User> userList = Arrays.asList(
                 new User("workshop@tdelektro.pl", adminPassword.getPassword(), "ADMIN"),
                 new User("tom@test.com", passwordEncoder.encode("password1")),
@@ -66,19 +76,20 @@ public class WorkshopApplication implements CommandLineRunner {
             taskRepository.save(task);
         }
 
-        //Cars for test
-        List<Car> carList = Arrays.asList(
+        FileReader fileReader = new FileReader("src/main/resources/cars.csv");
+        CSVReader csvReader = new CSVReader(fileReader);
 
-                new Car("1M8GDM9AXKP042788", "Pagani Zonda"),
-                new Car("1HGCM563X3A157921", "Honda Accord"),
-                new Car("1G1BL52P0TR136787", "Chevrolet Camaro"),
-                new Car("5TDZT34A34S190929", "Toyota Corolla"),
-                new Car("1FAFP34NX6W229751", "Ford F150")
+        //Header omit
+        csvReader.readNext();
+        String [] stringLine;
 
-        );
-
-        for (Car car : carList) {
+        while((stringLine = csvReader.readNext())!= null){
+            Car car = new Car(stringLine[0], stringLine[1]);
             carRepository.save(car);
         }
+
+
+
+
     }
 }
