@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
 
-    private UserServiceImpl userService;
+    UserServiceImpl userService;
 
     //
     //All mappings only for ADMIN, expect POST /add and GET /email/{userEmail}
