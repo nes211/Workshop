@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "car")
 @Getter
-@Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Car {
@@ -40,4 +39,19 @@ public class Car {
             inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"))
     List<Task> tasks;
 
+    void setVinNumber(String vinNumber) {
+        this.vinNumber = vinNumber;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Getter
-@Setter
+
 public class User {
 
     //User authority constructor
@@ -90,6 +90,23 @@ public class User {
         this.email = email;
     }
 
+    public User setUsername(String username) {
+        this.username = username;
+        return this;
+    }
 
+    public User setAuthority(String authority) {
+        this.authority = authority;
+        return this;
+    }
 
+    public User setRoles(String roles) {
+        this.roles = roles;
+        return this;
+    }
+
+    public User setCars(List<Car> cars) {
+        this.cars = cars;
+        return this;
+    }
 }

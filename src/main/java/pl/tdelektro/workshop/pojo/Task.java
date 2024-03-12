@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Table(name = "task")
 @Getter
-@Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
 @JacksonXmlRootElement(localName = "task")
@@ -36,4 +35,12 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "car_id", referencedColumnName = "id"))
     private List<Car> cars;
+
+    public void setToDoTaskName(String toDoTaskName) {
+        this.toDoTaskName = toDoTaskName;
+    }
+
+    void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
 }
